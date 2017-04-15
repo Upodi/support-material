@@ -71,6 +71,12 @@
         "responses": {
           "201": {
             "description": "Created. Body contains the id of the newly created object."
+          },
+          "400": {
+            "description": "Bad request. Invalid fields of object."
+          },
+          "500": {
+            "description": "General service error."
           }
         }
       },
@@ -101,12 +107,20 @@
         "responses": {
           "204": {
             "description": "No content."
+          },
+          "400": {
+            "description": "Bad request. Invalid fields of object."
+          },
+          "500": {
+            "description": "General service error."
           }
         }
       }
     },
     "/customers/{id}": {
       "get": {
+        "summary": "Get a customer.",
+        "description": "Return single customer.",
         "tags": [
           "customer"
         ],
@@ -119,7 +133,6 @@
             "type": "string"
           }
         ],
-        "description": "Return single customer.",
         "security": [
           {
             "Bearer": [
@@ -136,10 +149,18 @@
                 "$ref": "#/definitions/Customer"
               }
             }
+          },
+          "404": {
+            "description": "Not found. No object of id."
+          },
+          "500": {
+            "description": "General service error."
           }
         }
       },
       "delete": {
+        "summary": "Delete a customer.",
+        "description": "Delete a single customer based on the id of the customer.",
         "tags": [
           "customer"
         ],
@@ -152,7 +173,6 @@
             "type": "string"
           }
         ],
-        "description": "Deletes a known customer.",
         "security": [
           {
             "Bearer": [
@@ -170,7 +190,7 @@
     "/customers/{id}/assigncardtoken/": {
       "put": {
         "summary": "Assigns a card.",
-        "description": "Assigns a card to a customer and maps it as a payment method.\n#### API Token scope\n* write.\n",
+        "description": "Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.",
         "operationId": "AssignCardToken",
         "tags": [
           "customer",
@@ -209,10 +229,190 @@
     },
     "/subscriptions": {
       "get": {
+        "summary": "List subscriptions.",
+        "description": "Returns a list of subscriptions. Requires API scope 'read'.",
+        "operationId": "GetSubscription",
         "tags": [
           "subscription"
         ],
-        "description": "Returns a list of subscriptions. Requires API scope 'read'.",
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "subscription",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create subscription.",
+        "description": "Creates a new subscription. Subscriptions need to be activated before being active.",
+        "operationId": "CreateSubscription.",
+        "tags": [
+          "subscription"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. Body contains the id of the newly created object."
+          },
+          "400": {
+            "description": "Bad request. Invalid fields of object."
+          },
+          "500": {
+            "description": "General service error."
+          }
+        }
+      }
+    },
+    "/subscriptions/{id}": {
+      "get": {
+        "summary": "Get a subscription.",
+        "description": "Get a subscription based on the id. Requires API scope 'read'.",
+        "tags": [
+          "subscription"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Subscription"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{id}/activate/": {
+      "put": {
+        "summary": "Activate a subscription.",
+        "description": "Activate a newly created subscription.",
+        "tags": [
+          "subscription"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "500": {
+            "description": "General service error."
+          }
+        }
+      }
+    },
+    "/subscriptions/{id}/cancel/": {
+      "put": {
+        "summary": "Cancels a subscription.",
+        "description": "Cancels an active subscription.",
+        "tags": [
+          "subscription"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of subscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "500": {
+            "description": "General service error."
+          }
+        }
+      }
+    },
+    "/productplans": {
+      "get": {
+        "summary": "List product plans.",
+        "description": "Returns a list of product plans. Requires API scope 'read'.",
+        "operationId": "ListProductPlans",
+        "tags": [
+          "productplan"
+        ],
         "security": [
           {
             "Bearer": [
@@ -222,7 +422,49 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductPlan"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productplans/{id}": {
+      "get": {
+        "summary": "Get a product plan.",
+        "description": "Get a product plan based on the id. Requires API scope 'read'.",
+        "tags": [
+          "productplan"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of product plan",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ProductPlan"
+              }
+            }
           }
         }
       }
@@ -238,6 +480,48 @@
   },
   "definitions": {
     "Customer": {
+      "type": "object",
+      "required": [
+        "id",
+        "fullname"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        }
+      }
+    },
+    "Subscription": {
+      "type": "object",
+      "required": [
+        "id",
+        "customerid"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "customerid": {
+          "type": "string"
+        },
+        "productplanID": {
+          "type": "string"
+        },
+        "subscriptionnumber": {
+          "type": "string"
+        },
+        "autorenew": {
+          "type": "boolean"
+        },
+        "startdate": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductPlan": {
       "type": "object",
       "required": [
         "id",
