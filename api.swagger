@@ -247,8 +247,8 @@ paths:
 #
   /invoices:
     get:
-      summary: List invoices.
-      description: Returns a list of invoices. Requires API scope 'read'.
+      summary: /invoices/
+      description: Returns an array of invoices. Requires API scope 'read'.
       operationId: ListInvoices
       tags:
       - invoice
@@ -362,6 +362,10 @@ definitions:
         type: string
       country:
         type: string
+      subscriptions:
+        type: array
+        items:
+          $ref: '#/definitions/Subscription'
       createddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
@@ -376,16 +380,37 @@ definitions:
     properties:
       id:
         type: string
+        description: Guid or UUID
       customerid:
         type: string
-      productplanID:
+        description: Guid or UUID
+      productplanid:
         type: string
+        description: Guid or UUID
       subscriptionnumber:
         type: string
       autorenew:
         type: boolean
+      refkey:
+        type: string
+      statuscode:
+        type: integer
+      status:
+        type: integer
       startdate:
         type: string
+      enddate:
+        type: string
+        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
+      lastrenewaldate:
+        type: string
+        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
+      cancellationdate:
+        type: string
+        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
+      activationdate:
+        type: string
+        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
       createddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
@@ -397,11 +422,35 @@ definitions:
     required:
     - id
     - fullname
+    - sku
     properties:
       id:
         type: string
+        description: Guid or UUID
+      sku:
+        type: string
+        description: Maximum 50 chars.
       fullname:
         type: string
+      currencycode:
+        type: string
+        description: 3-letter ISO 4217 code for currency of the customer.
+      activecurrencies:
+        type: string
+      description:
+        type: string
+      status:
+        type: integer
+      subscriptions:
+        type: array
+        items:
+          $ref: '#/definitions/Subscription'
+      createddate:
+        type: string
+        description: date & time in format YYYY-MM-DD HH:MM:SST0
+      modifieddate:
+        type: string
+        description: date & time in format YYYY-MM-DD HH:MM:SST0
   Invoice:
     type: object
     required:
@@ -409,12 +458,57 @@ definitions:
     properties:
       id:
         type: string
+        description: Guid or UUID
+      customerid:
+        type: string
+        description: Guid or UUID
+      subscriptionid:
+        type: string
+        description: Guid or UUID
+      invoicedate:
+        type: string
+        description: date & time in format YYYY-MM-DD HH:MM:SST0
+      invoicenumber:
+        type: string
+      duedate:
+        type: string
+        description: date & time in format YYYY-MM-DD HH:MM:SST0
+      paymentdate:
+        type: string
+        description: date & time in format YYYY-MM-DD HH:MM:SST0
+      paymentstatus:
+        type: integer
+      currencycode:
+        type: string
+        description: 3-letter ISO 4217 code for currency of the customer.
+      totalamount:
+        type: number
+        description: decimal with 2 point precision.
+      total:
+        type: number
+        description: decimal with 2 point precision.
+      totalvat:
+        type: number
+        description: decimal with 2 point precision.
+      invoicelines:
+        type: array
+        items:
+          $ref: '#/definitions/InvoiceLine' 
+        description: array of invoiceline objects.
       createddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
       modifieddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
+  InvoiceLine:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        description: Guid or UUID
   CardToken:
     type: object
     properties:
