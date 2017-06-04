@@ -21,7 +21,7 @@ paths:
 #
   /customers:
     get:
-      summary: Get list of all customers.
+      summary: /customers/.
       description: Returns a list of customers. | Requires API scope 'read'.
       operationId: ListCustomer
       tags: 
@@ -36,7 +36,7 @@ paths:
             items:
               $ref: '#/definitions/Customer'
     post:
-      summary: Create a customer.
+      summary: /customers/.
       description: | 
         Creates a new customer and returns the id of the newly created object. 
         #### API Token scope
@@ -60,7 +60,7 @@ paths:
         500:
           description: General service error.
     put:
-      summary: Update a customer.
+      summary: /customers/.
       description: | 
         Updates an existing customer. 
         #### API Token scope
@@ -85,7 +85,7 @@ paths:
           description: General service error.
   /customers/{id}:
     get:
-      summary: Get a customer.
+      summary: /customers/:id.
       description: Return single customer.
       tags:
       - customer
@@ -107,7 +107,7 @@ paths:
         500:
           description: General service error.
     delete:
-      summary: Delete a customer.
+      summary: /customers/:id.
       description: Delete a single customer based on the id of the customer. 
       tags:
       - customer
