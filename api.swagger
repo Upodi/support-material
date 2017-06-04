@@ -21,8 +21,8 @@ paths:
 #
   /customers:
     get:
-      summary: /customers/.
-      description: Returns a list of customers. | Requires API scope 'read'.
+      summary: /customers/
+      description: Returns an array of customers. Requires API scope 'read'.
       operationId: ListCustomer
       tags: 
       - customer
@@ -36,9 +36,9 @@ paths:
             items:
               $ref: '#/definitions/Customer'
     post:
-      summary: /customers/.
+      summary: /customers/
       description: | 
-        Creates a new customer and returns the id of the newly created object. 
+        Creates a new customer and return the id. 
         #### API Token scope
         * write.
       operationId: CreateCustomer
@@ -60,11 +60,8 @@ paths:
         500:
           description: General service error.
     put:
-      summary: /customers/.
-      description: | 
-        Updates an existing customer. 
-        #### API Token scope
-        * write.
+      summary: /customers/
+      description: Update an existing customer. Requires API scope 'write'.
       operationId: UpdateCustomer
       tags:
       - customer
@@ -85,8 +82,8 @@ paths:
           description: General service error.
   /customers/{id}:
     get:
-      summary: /customers/:id.
-      description: Return single customer.
+      summary: /customers/:id
+      description: Return a single customer. Requires API scope 'read'.
       tags:
       - customer
       parameters:
@@ -107,8 +104,8 @@ paths:
         500:
           description: General service error.
     delete:
-      summary: /customers/:id.
-      description: Delete a single customer based on the id of the customer. 
+      summary: /customers/:id
+      description: Delete a single customer. Requires API scope 'write'.
       tags:
       - customer
       parameters:
@@ -124,7 +121,7 @@ paths:
           description: No content.
   /customers/{id}/assigncardtoken/:
     put:
-      summary: Assigns a card.
+      summary: /customers/:id/assigncardtoken
       description: Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.
       operationId: AssignCardToken
       tags:
@@ -151,7 +148,7 @@ paths:
 #
   /subscriptions:
     get:
-      summary: List subscriptions.
+      summary: /subscriptions/
       description: Returns a list of subscriptions. Requires API scope 'read'.
       operationId: GetSubscription
       tags:
