@@ -250,7 +250,7 @@ paths:
 #
   /invoices:
     get:
-      summary: List invoices
+      summary: List invoices.
       description: Returns a list of invoices. Requires API scope 'read'.
       operationId: ListInvoices
       tags:
