@@ -502,10 +502,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Transaction'
-      activities:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
@@ -1194,10 +1190,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/SubscriptionCharge'
-      activities:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
