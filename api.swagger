@@ -243,6 +243,75 @@ paths:
         500:
           description: General service error.
 #
+# subscription charges calls
+#
+  /subscriptionCharges:
+    get:
+      summary: /subscriptioncharges/
+      description: Returns a list of subscription charges. Requires API scope 'read'.
+      operationId: GetSubscriptionCharges
+      tags:
+      - subscription
+      - subscriptioncharge
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SubscriptionCharge'
+  /subscriptionCharges/{id}:
+    get:
+      summary: /subscriptioncharges/:id
+      description: Get a subscriptioncharge based on the id. Requires API scope 'read'.
+      operationId: GetSubscriptionCharge
+      tags:
+      - subscription
+      - subscriptioncharge
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SubscriptionCharge'
+  /subscriptionCharges/{id}/setamount/:
+    put:
+      summary: /subscriptioncharges/:id/setamount/
+      description: Set the amount of a subscription charge. Requires API scope 'write'.
+      operationId: PutSubscriptionChargeAmount
+      tags:
+      - subscription
+      - subscriptioncharge
+      parameters:
+        - name: newAmount
+          in: body
+          description: The new amount in decimal.
+          schema:
+            type: number
+          required: true
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: OK
+#
+# time calls
+#
+  /time:
+    get:
+      summary: /time/
+      description: Returns the current time of the server. Requires API scope 'read'.
+      operationId: GetTime
+      tags:
+      - time
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
 # invoice calls
 #
   /invoices:
