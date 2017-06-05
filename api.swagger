@@ -22,7 +22,10 @@ paths:
   /customers:
     get:
       summary: /customers/
-      description: Returns an array of customers. Requires API scope 'read'.
+      description: | 
+        Returns an array of customers.
+        #### API Token scope
+        * READ.
       operationId: ListCustomer
       tags: 
       - customer
@@ -40,7 +43,7 @@ paths:
       description: | 
         Creates a new customer and return the id. 
         #### API Token scope
-        * write.
+        * WRITE.
       operationId: CreateCustomer
       tags:
       - customer
@@ -61,7 +64,10 @@ paths:
           description: General service error.
     put:
       summary: /customers/
-      description: Update an existing customer. Requires API scope 'write'.
+      description: |
+        Update an existing customer.
+        #### API Token scope
+        * WRITE.
       operationId: UpdateCustomer
       tags:
       - customer
