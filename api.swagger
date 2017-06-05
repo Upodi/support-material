@@ -297,13 +297,12 @@ paths:
         description: ID of subscription charge
         required: true
         type: string
-      parameters:
-        - name: newAmount
-          in: body
-          description: The new amount in decimal.
-          schema:
-            type: number
-          required: true
+      - name: newAmount
+        in: body
+        description: The new amount in decimal.
+        schema:
+          type: number
+        required: true
       security:
         - Bearer: []
       responses:
