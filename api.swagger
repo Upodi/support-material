@@ -412,6 +412,40 @@ securityDefinitions:
     in: header
     description: Key must be Base64 encoded. Syntax 'Bearer {apiKey}'.
 definitions:
+  Activity:
+    type: object
+    properties:
+      entity:
+        type: object
+      id:
+        type: string
+        description: Guid or UUID.
+      entityid:
+        type: string
+        description: Guid or UUID.
+      activitytype:
+        type: integer
+      status:
+        type: integer
+      description:
+        type: string
+      duedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      recipient:
+        type: string
+      owner:
+        type: string
+        description: Guid or UUID. Allows null.
+      createdby:
+        type: string
+        description: Guid or UUID. Allows null.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   CardToken:
     type: object
     properties:
@@ -502,6 +536,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Transaction'
+      activities:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
@@ -1190,6 +1228,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/SubscriptionCharge'
+      activities:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
