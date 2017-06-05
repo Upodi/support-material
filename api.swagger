@@ -251,7 +251,6 @@ paths:
       description: Returns a list of subscription charges. Requires API scope 'read'.
       operationId: GetSubscriptionCharges
       tags:
-      - subscription
       - subscriptioncharge
       security:
         - Bearer: []
@@ -268,7 +267,6 @@ paths:
       description: Get a subscriptioncharge based on the id. Requires API scope 'read'.
       operationId: GetSubscriptionCharge
       tags:
-      - subscription
       - subscriptioncharge
       security:
         - Bearer: []
@@ -289,7 +287,6 @@ paths:
       description: Set the amount of a subscription charge. Requires API scope 'write'.
       operationId: PutSubscriptionChargeAmount
       tags:
-      - subscription
       - subscriptioncharge
       parameters:
       - name: id
@@ -399,6 +396,45 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ProductPlan'
+#
+# transactions calls
+#
+  /transactions:
+    get:
+      summary: /transactions/
+      description: Returns a list of transactions. Requires API scope 'read'.
+      operationId: ListTransactions
+      tags:
+      - transactions
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+  /transactions/{id}:
+    get:
+      summary: /transactions/:id/
+      description: Get a transaction based on the id. Requires API scope 'read'.
+      operationId: GetTransaction
+      tags:
+      - transactions
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of transaction
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
 # security
 securityDefinitions:
   #ApiKey:
