@@ -312,16 +312,182 @@ securityDefinitions:
     in: header
     description: Key must be Base64 encoded. Syntax 'Bearer {apiKey}'.
 definitions:
-  Customer:
+  Activity:
     type: object
-    required:
-    - id
-    - fullname
-    - accountnumber
+    properties:
+      entity:
+        type: object
+        item:
+          $ref: '#/definitions/BaseActivityEntity'
+      id:
+        type: string
+        description: Guid or UUID.
+      entityid:
+        type: string
+        description: Guid or UUID.
+      activitytype:
+        type: integer
+      status:
+        type: integer
+      description:
+        type: string
+      duedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      recipient:
+        type: string
+      owner:
+        type: string
+        description: Guid or UUID. Allows null.
+      createdby:
+        type: string
+        description: Guid or UUID. Allows null.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  BaseActivityEntity:
+    type: object
+    properties:
+      activities:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  BaseEntity:
+    type: object
     properties:
       id:
         type: string
-        description: Guid or UUID
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  BaseUserEntity:
+    type: object
+    properties:
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  CardData:
+    type: object
+    properties:
+      fullname:
+        type: string
+      issuer:
+        type: string
+      customerid:
+        type: string
+        description: Guid or UUID. Allows null.
+      expirydate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      creditcarddata:
+        type: string
+      creditcarddek:
+        type: string
+        description: Guid or UUID.
+      token:
+        type: string
+      tokenexpiration:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  CardToken:
+    type: object
+    properties:
+      token:
+        type: string
+  Currency:
+    type: object
+    properties:
+      id:
+        type: integer
+      currencyname:
+        type: string
+      exchangerate:
+        type: number
+      currencyid:
+        type: string
+      isactive:
+        type: integer
+        description: Boolean.
+      customers:
+        type: array
+        items:
+          $ref: '#/definitions/Customer'
+  Customer:
+    type: object
+    properties:
       accountnumber:
         type: string
       companyname:
@@ -334,20 +500,20 @@ definitions:
         type: string
       primaryemail:
         type: string
-      homephone:
-        type: string
-        description: Maximum 50 characters in length.
-      businessphone:
-        type: string
-        description: Maximum 50 characters in length.
-      mobilephone:
-        type: string
-        description: Maximum 50 characters in length.
       currencycode:
         type: string
-        description: 3-letter ISO 4217 code for currency of the customer.
       autobill:
-        type: boolean
+        type: integer
+        description: Boolean.
+      paymentmethod:
+        type: string
+        description: Guid or UUID. Allows null.
+      homephone:
+        type: string
+      businessphone:
+        type: string
+      mobilephone:
+        type: string
       addressline1:
         type: string
       addressline2:
@@ -356,67 +522,478 @@ definitions:
         type: string
       postalcode:
         type: string
+      country:
+        type: string
       county:
         type: string
       state:
         type: string
-      country:
-        type: string
+      defaultpaymentmethod:
+        type: object
+        item:
+          $ref: '#/definitions/PaymentMethod'
+      currency:
+        type: object
+        item:
+          $ref: '#/definitions/Currency'
       subscriptions:
         type: array
         items:
           $ref: '#/definitions/Subscription'
-      createddate:
+      invoices:
+        type: array
+        items:
+          $ref: '#/definitions/Invoice'
+      paymentmethods:
+        type: array
+        items:
+          $ref: '#/definitions/PaymentMethod'
+      subscriptioncharges:
+        type: array
+        items:
+          $ref: '#/definitions/SubscriptionCharge'
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+      activities:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
+      createdby:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-      modifieddate:
+        description: Guid or UUID.
+      modifiedby:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-  Subscription:
-    type: object
-    required:
-    - id
-    - customerid
-    properties:
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
       id:
         type: string
-        description: Guid or UUID
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  DataEncryptionKey:
+    type: object
+    properties:
+      cipher:
+        type: string
+      usefrom:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      useto:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  EmailTemplate:
+    type: object
+    properties:
+      fullname:
+        type: string
+      emailtemplatesetid:
+        type: string
+        description: Guid or UUID.
+      emailtemplateset:
+        type: object
+        item:
+          $ref: '#/definitions/EmailTemplateSet'
+      category:
+        type: string
+      subject:
+        type: string
+      isactive:
+        type: integer
+        description: Boolean.
+      htmlbody:
+        type: string
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  EmailTemplateSet:
+    type: object
+    properties:
+      fullname:
+        type: string
+      isdefault:
+        type: integer
+        description: Boolean.
+      sendername:
+        type: string
+      senderemail:
+        type: string
+      emailtemplates:
+        type: array
+        items:
+          $ref: '#/definitions/EmailTemplate'
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  Transaction:
+    type: object
+    properties:
       customerid:
         type: string
-        description: Guid or UUID
-      productplanid:
+        description: Guid or UUID.
+      invoiceid:
         type: string
-        description: Guid or UUID
-      subscriptionnumber:
-        type: string
-      autorenew:
-        type: boolean
-      refkey:
-        type: string
-      statuscode:
+        description: Guid or UUID. Allows null.
+      statecode:
         type: integer
       status:
         type: integer
-      startdate:
+      type:
+        type: integer
+      totalamount:
+        type: number
+      currencycode:
         type: string
-      enddate:
+      paymentmethodid:
         type: string
-        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
-      lastrenewaldate:
+        description: Guid or UUID. Allows null.
+      paymentproviderid:
         type: string
-        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
-      cancellationdate:
+        description: Guid or UUID. Allows null.
+      customer:
+        type: object
+        item:
+          $ref: '#/definitions/Customer'
+      paymentmethod:
+        type: object
+        item:
+          $ref: '#/definitions/PaymentMethod'
+      paymentprovider:
+        type: object
+        item:
+          $ref: '#/definitions/PaymentProvider'
+      invoice:
+        type: object
+        item:
+          $ref: '#/definitions/Invoice'
+      errorcode:
+        type: integer
+      gatewayreference:
         type: string
-        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
-      activationdate:
+      gatewayresponse:
         type: string
-        description: null or date & time in format YYYY-MM-DD HH:MM:SST0
+      gatewayerrorcode:
+        type: string
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
       createddate:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
       modifieddate:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  UoM:
+    type: object
+    properties:
+      fullname:
+        type: string
+      pluralname:
+        type: string
+      status:
+        type: integer
+      isactive:
+        type: integer
+        description: Boolean.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  DunningScheme:
+    type: object
+    properties:
+      isdefault:
+        type: integer
+        description: Boolean.
+      fullname:
+        type: string
+      retries:
+        type: integer
+      retryperiod:
+        type: integer
+      finalaction:
+        type: integer
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  Invoice:
+    type: object
+    properties:
+      customerid:
+        type: string
+        description: Guid or UUID.
+      subscriptionid:
+        type: string
+        description: Guid or UUID.
+      currencycode:
+        type: string
+      invoicecounter:
+        type: integer
+      totalamount:
+        type: number
+      total:
+        type: number
+      totalvat:
+        type: number
+      invoicedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      duedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      paymentdate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      paymentstatus:
+        type: integer
+      invoicenumber:
+        type: string
+      subscription:
+        type: object
+        item:
+          $ref: '#/definitions/Subscription'
+      customer:
+        type: object
+        item:
+          $ref: '#/definitions/Customer'
+      invoicelines:
+        type: array
+        items:
+          $ref: '#/definitions/InvoiceLine'
+      dunningschemeid:
+        type: string
+        description: Guid or UUID. Allows null.
+      dunningscheme:
+        type: object
+        item:
+          $ref: '#/definitions/DunningScheme'
+      dunningstep:
+        type: integer
+        desc: Allows null.
+      nextretry:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  InvoiceLine:
+    type: object
+    properties:
+      description:
+        type: string
+      invoiceid:
+        type: string
+        description: Guid or UUID.
+      subscriptionchargeid:
+        type: string
+        description: Guid or UUID.
+      productplanchargeid:
+        type: string
+        description: Guid or UUID. Allows null.
+      linenumber:
+        type: integer
+      quantity:
+        type: number
+      totalvat:
+        type: number
+      unitprice:
+        type: number
+      totalprice:
+        type: number
+      invoice:
+        type: object
+        item:
+          $ref: '#/definitions/Invoice'
+      subscriptioncharge:
+        type: object
+        item:
+          $ref: '#/definitions/SubscriptionCharge'
+      productplancharge:
+        type: object
+        item:
+          $ref: '#/definitions/ProductPlanCharge'
+      uomid:
+        type: string
+        description: Guid or UUID. Allows null.
+      unit:
+        type: string
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  PaymentMethod:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Guid or UUID.
+      fullname:
+        type: string
+      issuer:
+        type: string
+      customerid:
+        type: string
+        description: Guid or UUID.
+      expirydate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      paymentmethodtype:
+        type: integer
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      customer:
+        type: object
+        item:
+          $ref: '#/definitions/Customer'
+      paymentdata:
+        type: string
+  PaymentProvider:
+    type: object
+    properties:
+      fullname:
+        type: string
+      typename:
+        type: string
+      settings:
+        type: string
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   ProductFamily:
     type: object
     properties:
@@ -431,12 +1008,22 @@ definitions:
         description: Guid or UUID. Allows null.
       dunningscheme:
         type: object
+        item:
+          $ref: '#/definitions/DunningScheme'
       createdby:
         type: string
         description: Guid or UUID.
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -448,24 +1035,22 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   ProductPlan:
     type: object
-    required:
-    - id
-    - fullname
-    - sku
     properties:
-      id:
+      productfamilyid:
         type: string
-        description: Guid or UUID
+        description: Guid or UUID. Allows null.
       sku:
         type: string
-        description: Maximum 50 chars.
       fullname:
         type: string
       currencycode:
         type: string
-        description: 3-letter ISO 4217 code for currency of the customer.
       activecurrencies:
         type: string
+      currencies:
+        type: array
+        item:
+          type: string
       description:
         type: string
       status:
@@ -480,16 +1065,35 @@ definitions:
           $ref: '#/definitions/Subscription'
       productfamily:
         type: object
+        item:
+          $ref: '#/definitions/ProductFamily'
       productplanpricings:
         type: array
         items:
-          $ref: '#definitions/ProductPlanCharge'
+          $ref: '#/definitions/ProductPlanChargePricing'
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      id:
+        type: string
+        description: Guid or UUID.
       createddate:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
       modifieddate:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   ProductPlanCharge:
     type: object
     properties:
@@ -511,7 +1115,7 @@ definitions:
       billingperiodalignment:
         type: integer
       billingday:
-        type: object
+        type: integer
       defaultamount:
         type: number
       taxable:
@@ -519,6 +1123,8 @@ definitions:
         description: Boolean.
       productplan:
         type: object
+        item:
+          $ref: '#/definitions/ProductPlan'
       productplanchargepricings:
         type: array
         items:
@@ -528,7 +1134,9 @@ definitions:
         items:
           $ref: '#/definitions/SubscriptionCharge'
       uom:
-        type: integer
+        type: object
+        item:
+          $ref: '#/definitions/UoM'
       uomid:
         type: string
         description: Guid or UUID. Allows null.
@@ -538,6 +1146,14 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -570,8 +1186,12 @@ definitions:
         type: integer
       productplancharge:
         type: object
+        item:
+          $ref: '#/definitions/ProductPlanCharge'
       productplan:
         type: object
+        item:
+          $ref: '#/definitions/ProductPlan'
       id:
         type: string
         description: Guid or UUID.
@@ -581,87 +1201,166 @@ definitions:
       modifieddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  Invoice:
+  Task:
     type: object
-    required:
-    - id
+    properties:
+      fullname:
+        type: string
+      isrecurrent:
+        type: integer
+        description: Boolean.
+      taskdate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  TaxRule:
+    type: object
+    properties:
+      fullname:
+        type: string
+      priority:
+        type: integer
+      country:
+        type: string
+      state:
+        type: string
+      ruletype:
+        type: string
+      taxpct:
+        type: number
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  UserProfile:
+    type: object
     properties:
       id:
         type: string
-        description: Guid or UUID
+        description: Guid or UUID.
+      fullname:
+        type: string
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  Webhook:
+    type: object
+    properties:
+      fullname:
+        type: string
+      authenticitysecret:
+        type: string
+      url:
+        type: string
+      status:
+        type: integer
+      isactive:
+        type: integer
+        description: Boolean.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  Subscription:
+    type: object
+    properties:
       customerid:
         type: string
-        description: Guid or UUID
-      subscriptionid:
+        description: Guid or UUID.
+      productplanid:
         type: string
-        description: Guid or UUID
-      invoicedate:
+        description: Guid or UUID.
+      subscriptionnumber:
         type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-      invoicenumber:
-        type: string
-      duedate:
-        type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-      paymentdate:
-        type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-      paymentstatus:
+      autorenew:
         type: integer
-      currencycode:
+        description: Boolean.
+      statecode:
+        type: integer
+      status:
+        type: integer
+      startdate:
         type: string
-        description: 3-letter ISO 4217 code for currency of the customer.
-      totalamount:
-        type: number
-        description: decimal with 2 point precision.
-      total:
-        type: number
-        description: decimal with 2 point precision.
-      totalvat:
-        type: number
-        description: decimal with 2 point precision.
-      invoicelines:
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      enddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      lifetime:
+        type: integer
+      initialterminterval:
+        type: integer
+      initialtermperiod:
+        type: integer
+      initialterm:
+        type: string
+      renewalterminterval:
+        type: integer
+      renewaltermperiod:
+        type: integer
+      renewalterm:
+        type: string
+      refkey:
+        type: string
+      lastrenewaldate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      cancellationdate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      activationdate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      customer:
+        type: object
+        item:
+          $ref: '#/definitions/Customer'
+      productplan:
+        type: object
+        item:
+          $ref: '#/definitions/ProductPlan'
+      subscriptioncharges:
         type: array
         items:
-          $ref: '#/definitions/InvoiceLine' 
-        description: array of invoiceline objects.
-      createddate:
-        type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-      modifieddate:
-        type: string
-        description: date & time in format YYYY-MM-DD HH:MM:SST0
-  InvoiceLine:
-    type: object
-    required:
-    - id
-    properties:
-      description:
-        type: string
-      invoiceid:
+          $ref: '#/definitions/SubscriptionCharge'
+      activities:
+        type: array
+        items:
+          $ref: '#/definitions/Activity'
+      createdby:
         type: string
         description: Guid or UUID.
-      subscriptionchargeid:
+      modifiedby:
         type: string
         description: Guid or UUID.
-      productplanchargeid:
-        type: string
-        description: Guid or UUID. Allows null.
-      linenumber:
-        type: integer
-      quantity:
-        type: number
-      totalvat:
-        type: number
-      unitprice:
-        type: number
-      totalprice:
-        type: number
-      uomid:
-        type: string
-        description: Guid or UUID. Allows null.
-      unit:
-        type: string
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -671,11 +1370,6 @@ definitions:
       modifieddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  CardToken:
-    type: object
-    properties:
-      token:
-        type: string
   SubscriptionCharge:
     type: object
     properties:
@@ -689,10 +1383,16 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
       subscription:
         type: object
+        item:
+          $ref: '#/definitions/Subscription'
       productplancharge:
         type: object
+        item:
+          $ref: '#/definitions/ProductPlanCharge'
       customer:
         type: object
+        item:
+          $ref: '#/definitions/Customer'
       subscriptionid:
         type: string
         description: Guid or UUID. Allows null.
@@ -719,6 +1419,8 @@ definitions:
         description: Guid or UUID. Allows null.
       invoice:
         type: object
+        item:
+          $ref: '#/definitions/Invoice'
       statecode:
         type: integer
       createdby:
@@ -727,6 +1429,14 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        type: object
+        item:
+          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
