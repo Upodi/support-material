@@ -24,7 +24,7 @@ paths:
       summary: /customers/
       description: | 
         Returns an array of customers.
-        #### API Token scope
+        ##### API Token scope
         * READ.
       operationId: ListCustomer
       tags: 
@@ -41,8 +41,8 @@ paths:
     post:
       summary: /customers/
       description: | 
-        Creates a new customer and return the id. 
-        #### API Token scope
+        Creates a customer and return the id. 
+        ##### API Token scope
         * WRITE.
       operationId: CreateCustomer
       tags:
@@ -81,7 +81,7 @@ paths:
             $ref: '#/definitions/Customer'
       responses:
         204:
-          description: No content.
+          description: No content. Customer updated.
         400:
           description: Bad request. Invalid fields of object.
         500:
@@ -228,7 +228,10 @@ paths:
   /subscriptions/{id}/cancel/:
     put:
       summary: /subscriptions/:id/cancel
-      description: Cancels an active subscription. Requires API scope 'write'.
+      description: |
+        Cancels an active subscription. 
+        #### API Token scope
+        * WRITE.
       tags:
       - subscription
       security:
@@ -241,7 +244,7 @@ paths:
         type: string
       responses:
         204:
-          description: No content.
+          description: No content. subscription updated.
         400:
           description: Bad request.
         404:
@@ -364,6 +367,39 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Invoice'
+  /invoices/{id}/markpaid/:
+    put:
+      summary: /invoices/:id/markpaid/
+      description: |
+        Mark an invoice as paid.
+	#### API Token scope
+	* WRITE.
+      operationId: PutInvoicePaid
+      tags:
+      - invoice
+      parameters:
+      - name: id
+        in: path
+        description: ID of invoice
+        required: true
+        type: string
+      - name: date
+        in: body
+        description: Date upon the invoice was paid.
+        schema:
+          type: string
+        required: true
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: OK. Invoice paid.
+        400:
+          description: Bad request.
+        404:
+          description: Not found. No invoice by id.
+        500:
+          description: General service error.
 #
 # product plan calls
 #
