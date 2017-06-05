@@ -1,324 +1,9 @@
-# define
-swagger: '2.0'
-info:
-  version: 2.1.1
-  title: Upodi API
-  description: This documentation is for v2.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
-host: api.upodi.io
-basePath: /v2
-# schemes
-schemes:
-  - https
-# media types
-consumes:
-  - application/json
-produces:
-  - application/json
-# paths
-paths:
-#
-# customer calls
-#
-  /customers:
-    get:
-      summary: /customers/
-      description: Returns an array of customers. Requires API scope 'read'.
-      operationId: ListCustomer
-      tags: 
-      - customer
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Customer'
-    post:
-      summary: /customers/
-      description: | 
-        Creates a new customer and return the id. 
-        #### API Token scope
-        * write.
-      operationId: CreateCustomer
-      tags:
-      - customer
-      security:
-        - Bearer: []
-      parameters:
-        - name: customer
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Customer'
-      responses:
-        201:
-          description: Created. Body contains the id of the newly created object.
-        400:
-          description: Bad request. Invalid fields of object.
-        500:
-          description: General service error.
-    put:
-      summary: /customers/
-      description: Update an existing customer. Requires API scope 'write'.
-      operationId: UpdateCustomer
-      tags:
-      - customer
-      security:
-        - Bearer: []
-      parameters:
-        - name: customer
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Customer'
-      responses:
-        204:
-          description: No content.
-        400:
-          description: Bad request. Invalid fields of object.
-        500:
-          description: General service error.
-  /customers/{id}:
-    get:
-      summary: /customers/:id
-      description: Return a single customer. Requires API scope 'read'.
-      tags:
-      - customer
-      parameters:
-      - name: id
-        in: path
-        description: ID of customer
-        required: true
-        type: string
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/Customer'
-        404:
-          description: Not found. No object of id.
-        500:
-          description: General service error.
-    delete:
-      summary: /customers/:id
-      description: Delete a single customer. Requires API scope 'write'.
-      tags:
-      - customer
-      parameters:
-      - name: id
-        in: path
-        description: ID of customer
-        required: true
-        type: string
-      security:
-        - Bearer: []
-      responses:
-        204:
-          description: No content.
-  /customers/{id}/assigncardtoken/:
-    put:
-      summary: /customers/:id/assigncardtoken
-      description: Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.
-      operationId: AssignCardToken
-      tags:
-      - customer
-      - creditcard
-      security:
-        - Bearer: []
-      parameters:
-      - name: id
-        in: path
-        description: ID of customer
-        required: true
-        type: string
-      - name: cardToken
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/CardToken'
-      responses:
-        204:
-          description: No content.
-#
-# subscription calls
-#
-  /subscriptions:
-    get:
-      summary: /subscriptions/
-      description: Returns a list of subscriptions. Requires API scope 'read'.
-      operationId: GetSubscription
-      tags:
-      - subscription
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Subscription'
-    post:
-      summary: Create subscription.
-      description: Creates a new subscription. Subscriptions need to be activated before being active.
-      operationId: CreateSubscription.
-      tags:
-      - subscription
-      security:
-        - Bearer: []
-      responses:
-        201:
-          description: Created. Body contains the id of the newly created object.
-        400:
-          description: Bad request. Invalid fields of object.
-        500:
-          description: General service error.
-  /subscriptions/{id}:
-    get:
-      summary: /subscriptions/:id/
-      description: Get a subscription based on the id. Requires API scope 'read'.
-      tags:
-      - subscription
-      security:
-        - Bearer: []
-      parameters:
-      - name: id
-        in: path
-        description: ID of subscription
-        required: true
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/Subscription'
-  /subscriptions/{id}/activate/:
-    put:
-      summary: /subscriptions/:id/activate/
-      description: Activate a newly created subscription.
-      tags:
-      - subscription
-      security:
-        - Bearer: []
-      parameters:
-      - name: id
-        in: path
-        description: ID of subscription
-        required: true
-        type: string
-      responses:
-        204:
-          description: No content.
-        400:
-          description: Bad request.
-        404:
-          description: Not found.
-        500:
-          description: General service error.
-  /subscriptions/{id}/cancel/:
-    put:
-      summary: /subscriptions/:id/cancel/
-      description: Cancels an active subscription.
-      tags:
-      - subscription
-      security:
-        - Bearer: []
-      parameters:
-      - name: id
-        in: path
-        description: ID of subscription
-        required: true
-        type: string
-      responses:
-        204:
-          description: No content.
-        400:
-          description: Bad request.
-        404:
-          description: Not found.
-        500:
-          description: General service error.
-#
-# invoice calls
-#
-  /invoices:
-    get:
-      summary: /invoices/
-      description: Returns an array of invoices. Requires API scope 'read'.
-      operationId: ListInvoices
-      tags:
-      - invoice
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Invoice'
-#
-# product plan calls
-#
-  /productplans:
-    get:
-      summary: List product plans.
-      description: Returns a list of product plans. Requires API scope 'read'.
-      operationId: ListProductPlans
-      tags: 
-      - productplan
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ProductPlan'
-  /productplans/{id}:
-    get:
-      summary: Get a product plan.
-      description: Get a product plan based on the id. Requires API scope 'read'.
-      tags:
-      - productplan
-      security:
-        - Bearer: []
-      parameters:
-      - name: id
-        in: path
-        description: ID of product plan
-        required: true
-        type: string
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/ProductPlan'
-# security
-securityDefinitions:
-  #ApiKey:
-  #  type: apiKey
-  #  in: header
-  #  name: Authentication
-  #  description: Key must be Base64 encoded. Syntax 'Bearer {apiKey}'
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
-    description: Key must be Base64 encoded. Syntax 'Bearer {apiKey}'.
 definitions:
   Activity:
     type: object
     properties:
       entity:
         type: object
-        item:
-          $ref: '#/definitions/BaseActivityEntity'
       id:
         type: string
         description: Guid or UUID.
@@ -342,74 +27,6 @@ definitions:
       createdby:
         type: string
         description: Guid or UUID. Allows null.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  BaseActivityEntity:
-    type: object
-    properties:
-      activities:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
-      createdby:
-        type: string
-        description: Guid or UUID.
-      modifiedby:
-        type: string
-        description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  BaseEntity:
-    type: object
-    properties:
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  BaseUserEntity:
-    type: object
-    properties:
-      createdby:
-        type: string
-        description: Guid or UUID.
-      modifiedby:
-        type: string
-        description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      id:
-        type: string
-        description: Guid or UUID.
       createddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
@@ -445,14 +62,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -530,12 +139,8 @@ definitions:
         type: string
       defaultpaymentmethod:
         type: object
-        item:
-          $ref: '#/definitions/PaymentMethod'
       currency:
         type: object
-        item:
-          $ref: '#/definitions/Currency'
       subscriptions:
         type: array
         items:
@@ -566,14 +171,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -613,8 +210,6 @@ definitions:
         description: Guid or UUID.
       emailtemplateset:
         type: object
-        item:
-          $ref: '#/definitions/EmailTemplateSet'
       category:
         type: string
       subject:
@@ -630,14 +225,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -669,14 +256,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -713,20 +292,12 @@ definitions:
         description: Guid or UUID. Allows null.
       customer:
         type: object
-        item:
-          $ref: '#/definitions/Customer'
       paymentmethod:
         type: object
-        item:
-          $ref: '#/definitions/PaymentMethod'
       paymentprovider:
         type: object
-        item:
-          $ref: '#/definitions/PaymentProvider'
       invoice:
         type: object
-        item:
-          $ref: '#/definitions/Invoice'
       errorcode:
         type: integer
       gatewayreference:
@@ -741,14 +312,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -799,14 +362,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -850,12 +405,8 @@ definitions:
         type: string
       subscription:
         type: object
-        item:
-          $ref: '#/definitions/Subscription'
       customer:
         type: object
-        item:
-          $ref: '#/definitions/Customer'
       invoicelines:
         type: array
         items:
@@ -865,11 +416,9 @@ definitions:
         description: Guid or UUID. Allows null.
       dunningscheme:
         type: object
-        item:
-          $ref: '#/definitions/DunningScheme'
       dunningstep:
         type: integer
-        desc: Allows null.
+        description: Allows null.
       nextretry:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
@@ -879,14 +428,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -922,16 +463,10 @@ definitions:
         type: number
       invoice:
         type: object
-        item:
-          $ref: '#/definitions/Invoice'
       subscriptioncharge:
         type: object
-        item:
-          $ref: '#/definitions/SubscriptionCharge'
       productplancharge:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlanCharge'
       uomid:
         type: string
         description: Guid or UUID. Allows null.
@@ -972,8 +507,6 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
       customer:
         type: object
-        item:
-          $ref: '#/definitions/Customer'
       paymentdata:
         type: string
   PaymentProvider:
@@ -1008,22 +541,12 @@ definitions:
         description: Guid or UUID. Allows null.
       dunningscheme:
         type: object
-        item:
-          $ref: '#/definitions/DunningScheme'
       createdby:
         type: string
         description: Guid or UUID.
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -1049,8 +572,6 @@ definitions:
         type: string
       currencies:
         type: array
-        item:
-          type: string
       description:
         type: string
       status:
@@ -1065,8 +586,6 @@ definitions:
           $ref: '#/definitions/Subscription'
       productfamily:
         type: object
-        item:
-          $ref: '#/definitions/ProductFamily'
       productplanpricings:
         type: array
         items:
@@ -1077,14 +596,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -1116,6 +627,7 @@ definitions:
         type: integer
       billingday:
         type: integer
+        description: Allows null.
       defaultamount:
         type: number
       taxable:
@@ -1123,8 +635,6 @@ definitions:
         description: Boolean.
       productplan:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlan'
       productplanchargepricings:
         type: array
         items:
@@ -1135,8 +645,6 @@ definitions:
           $ref: '#/definitions/SubscriptionCharge'
       uom:
         type: object
-        item:
-          $ref: '#/definitions/UoM'
       uomid:
         type: string
         description: Guid or UUID. Allows null.
@@ -1146,14 +654,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -1186,12 +686,8 @@ definitions:
         type: integer
       productplancharge:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlanCharge'
       productplan:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlan'
       id:
         type: string
         description: Guid or UUID.
@@ -1333,12 +829,8 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
       customer:
         type: object
-        item:
-          $ref: '#/definitions/Customer'
       productplan:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlan'
       subscriptioncharges:
         type: array
         items:
@@ -1353,14 +845,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -1383,16 +867,10 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
       subscription:
         type: object
-        item:
-          $ref: '#/definitions/Subscription'
       productplancharge:
         type: object
-        item:
-          $ref: '#/definitions/ProductPlanCharge'
       customer:
         type: object
-        item:
-          $ref: '#/definitions/Customer'
       subscriptionid:
         type: string
         description: Guid or UUID. Allows null.
@@ -1419,8 +897,6 @@ definitions:
         description: Guid or UUID. Allows null.
       invoice:
         type: object
-        item:
-          $ref: '#/definitions/Invoice'
       statecode:
         type: integer
       createdby:
@@ -1429,14 +905,6 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
-      createdbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
-      modifiedbyuser:
-        type: object
-        item:
-          $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
