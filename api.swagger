@@ -179,7 +179,7 @@ paths:
           description: General service error.
   /subscriptions/{id}:
     get:
-      summary: Get a subscription.
+      summary: /subscriptions/:id/
       description: Get a subscription based on the id. Requires API scope 'read'.
       tags:
       - subscription
@@ -198,7 +198,7 @@ paths:
             $ref: '#/definitions/Subscription'
   /subscriptions/{id}/activate/:
     put:
-      summary: Activate a subscription.
+      summary: /subscriptions/:id/activate/
       description: Activate a newly created subscription.
       tags:
       - subscription
@@ -221,7 +221,7 @@ paths:
           description: General service error.
   /subscriptions/{id}/cancel/:
     put:
-      summary: Cancels a subscription.
+      summary: /subscriptions/:id/cancel/
       description: Cancels an active subscription.
       tags:
       - subscription
@@ -417,6 +417,35 @@ definitions:
       modifieddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
+  ProductFamily:
+    type: object
+    properties:
+      fullname:
+        type: string
+      productplans:
+        type: array
+        items:
+          $ref: '#/definitions/ProductPlan'
+      dunningschemeid:
+        type: string
+        description: Guid or UUID. Allows null.
+      dunningscheme:
+        type: object
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   ProductPlan:
     type: object
     required:
@@ -441,16 +470,117 @@ definitions:
         type: string
       status:
         type: integer
+      productplancharges:
+        type: array
+        items:
+          $ref: '#/definitions/ProductPlanCharge'
       subscriptions:
         type: array
         items:
           $ref: '#/definitions/Subscription'
+      productfamily:
+        type: object
+      productplanpricings:
+        type: array
+        items:
+          $ref: '#definitions/ProductPlanCharge'
       createddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
       modifieddate:
         type: string
         description: date & time in format YYYY-MM-DD HH:MM:SST0
+  ProductPlanCharge:
+    type: object
+    properties:
+      productplanid:
+        type: string
+        description: Guid or UUID.
+      fullname:
+        type: string
+      invoicetext:
+        type: string
+      pricingmodel:
+        type: integer
+      chargetype:
+        type: integer
+      billingperiod:
+        type: integer
+      billingperiodinterval:
+        type: integer
+      billingperiodalignment:
+        type: integer
+      billingday:
+        type: object
+      defaultamount:
+        type: number
+      taxable:
+        type: integer
+        description: Boolean.
+      productplan:
+        type: object
+      productplanchargepricings:
+        type: array
+        items:
+          $ref: '#/definitions/ProductPlanChargePricing'
+      subscriptioncharges:
+        type: array
+        items:
+          $ref: '#/definitions/SubscriptionCharge'
+      uom:
+        type: integer
+      uomid:
+        type: string
+        description: Guid or UUID. Allows null.
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  ProductPlanChargePricing:
+    type: object
+    properties:
+      productplanchargeid:
+        type: string
+        description: Guid or UUID.
+      productplanid:
+        type: string
+        description: Guid or UUID. Allows null.
+      segment:
+        type: integer
+      currencycode:
+        type: string
+      price:
+        type: number
+      tierfrom:
+        type: integer
+      tierto:
+        type: integer
+      tierpriceformat:
+        type: integer
+      productplancharge:
+        type: object
+      productplan:
+        type: object
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   Invoice:
     type: object
     required:
@@ -506,11 +636,103 @@ definitions:
     required:
     - id
     properties:
+      description:
+        type: string
+      invoiceid:
+        type: string
+        description: Guid or UUID.
+      subscriptionchargeid:
+        type: string
+        description: Guid or UUID.
+      productplanchargeid:
+        type: string
+        description: Guid or UUID. Allows null.
+      linenumber:
+        type: integer
+      quantity:
+        type: number
+      totalvat:
+        type: number
+      unitprice:
+        type: number
+      totalprice:
+        type: number
+      uomid:
+        type: string
+        description: Guid or UUID. Allows null.
+      unit:
+        type: string
       id:
         type: string
-        description: Guid or UUID
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   CardToken:
     type: object
     properties:
       token:
         type: string
+  SubscriptionCharge:
+    type: object
+    properties:
+      amount:
+        type: number
+      nextchargedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      previouschargedate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      subscription:
+        type: object
+      productplancharge:
+        type: object
+      customer:
+        type: object
+      subscriptionid:
+        type: string
+        description: Guid or UUID. Allows null.
+      productplanchargeid:
+        type: string
+        description: Guid or UUID. Allows null.
+      customerid:
+        type: string
+        description: Guid or UUID.
+      unitprice:
+        type: number
+      currencycode:
+        type: string
+      description:
+        type: string
+      ismanual:
+        type: integer
+        description: Boolean.
+      iscredit:
+        type: integer
+        description: Boolean.
+      invoiceid:
+        type: string
+        description: Guid or UUID. Allows null.
+      invoice:
+        type: object
+      statecode:
+        type: integer
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
