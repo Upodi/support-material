@@ -272,6 +272,12 @@ paths:
       - subscriptioncharge
       security:
         - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription charge
+        required: true
+        type: string
       responses:
         200:
           description: OK
@@ -285,6 +291,12 @@ paths:
       tags:
       - subscription
       - subscriptioncharge
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription charge
+        required: true
+        type: string
       parameters:
         - name: newAmount
           in: body
