@@ -315,8 +315,6 @@ definitions:
   Activity:
     type: object
     properties:
-      entity:
-        $ref: '#/definitions/BaseActivityEntity'
       id:
         type: string
         description: Guid or UUID.
