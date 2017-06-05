@@ -163,8 +163,8 @@ paths:
             items:
               $ref: '#/definitions/Subscription'
     post:
-      summary: Create subscription.
-      description: Creates a new subscription. Subscriptions need to be activated before being active.
+      summary: /subscriptions/
+      description: Creates a new subscription. Subscriptions need to be activated before being active. Requires API scope 'write'.
       operationId: CreateSubscription.
       tags:
       - subscription
@@ -179,7 +179,7 @@ paths:
           description: General service error.
   /subscriptions/{id}:
     get:
-      summary: Get a subscription.
+      summary: /subscriptions/:id
       description: Get a subscription based on the id. Requires API scope 'read'.
       tags:
       - subscription
@@ -198,7 +198,7 @@ paths:
             $ref: '#/definitions/Subscription'
   /subscriptions/{id}/activate/:
     put:
-      summary: Activate a subscription.
+      summary: /subscriptions/:id/activate
       description: Activate a newly created subscription.
       tags:
       - subscription
@@ -221,8 +221,8 @@ paths:
           description: General service error.
   /subscriptions/{id}/cancel/:
     put:
-      summary: Cancels a subscription.
-      description: Cancels an active subscription.
+      summary: /subscriptions/:id/cancel
+      description: Cancels an active subscription. Requires API scope 'write'.
       tags:
       - subscription
       security:
@@ -247,7 +247,7 @@ paths:
 #
   /invoices:
     get:
-      summary: List invoices.
+      summary: /invoices/
       description: Returns a list of invoices. Requires API scope 'read'.
       operationId: ListInvoices
       tags:
@@ -261,12 +261,32 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Invoice'
+  /invoices/{id}:
+    get:
+      summary: /invoices/:id
+      description: Get a invoice based on the id. Requires API scope 'read'.
+      operationId: GetInvoice
+      tags:
+      - invoice
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of invoice
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
 #
 # product plan calls
 #
   /productplans:
     get:
-      summary: List product plans.
+      summary: /productplans/
       description: Returns a list of product plans. Requires API scope 'read'.
       operationId: ListProductPlans
       tags: 
@@ -282,7 +302,7 @@ paths:
               $ref: '#/definitions/ProductPlan'
   /productplans/{id}:
     get:
-      summary: Get a product plan.
+      summary: /productplans/:id
       description: Get a product plan based on the id. Requires API scope 'read'.
       tags:
       - productplan
@@ -312,82 +332,6 @@ securityDefinitions:
     in: header
     description: Key must be Base64 encoded. Syntax 'Bearer {apiKey}'.
 definitions:
-  Activity:
-    type: object
-    properties:
-      entity:
-        type: string
-      id:
-        type: string
-        description: Guid or UUID.
-      entityid:
-        type: string
-        description: Guid or UUID.
-      activitytype:
-        type: integer
-      status:
-        type: integer
-      description:
-        type: string
-      duedate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
-      recipient:
-        type: string
-      owner:
-        type: string
-        description: Guid or UUID. Allows null.
-      createdby:
-        type: string
-        description: Guid or UUID. Allows null.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  CardData:
-    type: object
-    properties:
-      fullname:
-        type: string
-      issuer:
-        type: string
-      customerid:
-        type: string
-        description: Guid or UUID. Allows null.
-      expirydate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      creditcarddata:
-        type: string
-      creditcarddek:
-        type: string
-        description: Guid or UUID.
-      token:
-        type: string
-      tokenexpiration:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
-      createdby:
-        type: string
-        description: Guid or UUID.
-      modifiedby:
-        type: string
-        description: Guid or UUID.
-      createdbyuser:
-        type: string
-      modifiedbyuser:
-        type: string
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   CardToken:
     type: object
     properties:
@@ -478,10 +422,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Transaction'
-      activities:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
@@ -492,26 +432,6 @@ definitions:
         type: string
       modifiedbyuser:
         type: string
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  DataEncryptionKey:
-    type: object
-    properties:
-      cipher:
-        type: string
-      usefrom:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      useto:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
       id:
         type: string
         description: Guid or UUID.
@@ -1190,10 +1110,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/SubscriptionCharge'
-      activities:
-        type: array
-        items:
-          $ref: '#/definitions/Activity'
       createdby:
         type: string
         description: Guid or UUID.
