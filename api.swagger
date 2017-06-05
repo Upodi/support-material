@@ -3,7 +3,7 @@ definitions:
     type: object
     properties:
       entity:
-        type: object
+        $ref: '#/definitions/BaseActivityEntity'
       id:
         type: string
         description: Guid or UUID.
@@ -62,6 +62,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -138,9 +142,9 @@ definitions:
       state:
         type: string
       defaultpaymentmethod:
-        type: object
+        $ref: '#/definitions/PaymentMethod'
       currency:
-        type: object
+        $ref: '#/definitions/Currency'
       subscriptions:
         type: array
         items:
@@ -171,6 +175,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -209,7 +217,7 @@ definitions:
         type: string
         description: Guid or UUID.
       emailtemplateset:
-        type: object
+        $ref: '#/definitions/EmailTemplateSet'
       category:
         type: string
       subject:
@@ -225,6 +233,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -256,6 +268,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -291,13 +307,13 @@ definitions:
         type: string
         description: Guid or UUID. Allows null.
       customer:
-        type: object
+        $ref: '#/definitions/Customer'
       paymentmethod:
-        type: object
+        $ref: '#/definitions/PaymentMethod'
       paymentprovider:
-        type: object
+        $ref: '#/definitions/PaymentProvider'
       invoice:
-        type: object
+        $ref: '#/definitions/Invoice'
       errorcode:
         type: integer
       gatewayreference:
@@ -312,6 +328,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -362,6 +382,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -404,9 +428,9 @@ definitions:
       invoicenumber:
         type: string
       subscription:
-        type: object
+        $ref: '#/definitions/Subscription'
       customer:
-        type: object
+        $ref: '#/definitions/Customer'
       invoicelines:
         type: array
         items:
@@ -415,7 +439,7 @@ definitions:
         type: string
         description: Guid or UUID. Allows null.
       dunningscheme:
-        type: object
+        $ref: '#/definitions/DunningScheme'
       dunningstep:
         type: integer
         description: Allows null.
@@ -428,6 +452,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -462,11 +490,11 @@ definitions:
       totalprice:
         type: number
       invoice:
-        type: object
+        $ref: '#/definitions/Invoice'
       subscriptioncharge:
-        type: object
+        $ref: '#/definitions/SubscriptionCharge'
       productplancharge:
-        type: object
+        $ref: '#/definitions/ProductPlanCharge'
       uomid:
         type: string
         description: Guid or UUID. Allows null.
@@ -506,7 +534,7 @@ definitions:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
       customer:
-        type: object
+        $ref: '#/definitions/Customer'
       paymentdata:
         type: string
   PaymentProvider:
@@ -540,13 +568,17 @@ definitions:
         type: string
         description: Guid or UUID. Allows null.
       dunningscheme:
-        type: object
+        $ref: '#/definitions/DunningScheme'
       createdby:
         type: string
         description: Guid or UUID.
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -585,7 +617,7 @@ definitions:
         items:
           $ref: '#/definitions/Subscription'
       productfamily:
-        type: object
+        $ref: '#/definitions/ProductFamily'
       productplanpricings:
         type: array
         items:
@@ -596,6 +628,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -634,7 +670,7 @@ definitions:
         type: integer
         description: Boolean.
       productplan:
-        type: object
+        $ref: '#/definitions/ProductPlan'
       productplanchargepricings:
         type: array
         items:
@@ -644,7 +680,7 @@ definitions:
         items:
           $ref: '#/definitions/SubscriptionCharge'
       uom:
-        type: object
+        $ref: '#/definitions/UoM'
       uomid:
         type: string
         description: Guid or UUID. Allows null.
@@ -654,6 +690,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -685,9 +725,9 @@ definitions:
       tierpriceformat:
         type: integer
       productplancharge:
-        type: object
+        $ref: '#/definitions/ProductPlanCharge'
       productplan:
-        type: object
+        $ref: '#/definitions/ProductPlan'
       id:
         type: string
         description: Guid or UUID.
@@ -828,9 +868,9 @@ definitions:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
       customer:
-        type: object
+        $ref: '#/definitions/Customer'
       productplan:
-        type: object
+        $ref: '#/definitions/ProductPlan'
       subscriptioncharges:
         type: array
         items:
@@ -845,6 +885,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
@@ -866,11 +910,11 @@ definitions:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
       subscription:
-        type: object
+        $ref: '#/definitions/Subscription'
       productplancharge:
-        type: object
+        $ref: '#/definitions/ProductPlanCharge'
       customer:
-        type: object
+        $ref: '#/definitions/Customer'
       subscriptionid:
         type: string
         description: Guid or UUID. Allows null.
@@ -896,7 +940,7 @@ definitions:
         type: string
         description: Guid or UUID. Allows null.
       invoice:
-        type: object
+        $ref: '#/definitions/Invoice'
       statecode:
         type: integer
       createdby:
@@ -905,6 +949,10 @@ definitions:
       modifiedby:
         type: string
         description: Guid or UUID.
+      createdbyuser:
+        $ref: '#/definitions/UserProfile'
+      modifiedbyuser:
+        $ref: '#/definitions/UserProfile'
       id:
         type: string
         description: Guid or UUID.
