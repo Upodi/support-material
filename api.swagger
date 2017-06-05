@@ -388,6 +388,7 @@ paths:
         description: Date upon the invoice was paid.
         schema:
           type: string
+          description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
         required: true
       security:
         - Bearer: []
