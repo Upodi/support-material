@@ -372,8 +372,8 @@ paths:
       summary: /invoices/:id/markpaid/
       description: |
         Mark an invoice as paid.
-	#### API Token scope
-	* WRITE.
+        #### API Token scope
+        * WRITE.
       operationId: PutInvoicePaid
       tags:
       - invoice
@@ -388,6 +388,7 @@ paths:
         description: Date upon the invoice was paid.
         schema:
           type: string
+          description: Date.Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
         required: true
       security:
         - Bearer: []
