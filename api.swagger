@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.1.2
+  version: 2.1.3
   title: Upodi API
   description: This documentation is for v2.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -543,13 +543,17 @@ definitions:
         type: string
       isactive:
         type: integer
-        description: Boolean.
+        description: boolean.
       customers:
         type: array
         items:
           $ref: '#/definitions/Customer'
   Customer:
     type: object
+    required:
+      - accountnumber
+      - fullname
+      - currencycode
     properties:
       accountnumber:
         type: string
@@ -571,6 +575,12 @@ definitions:
       paymentmethod:
         type: string
         description: Guid or UUID. Allows null.
+      parentid:
+        type: string
+        description: Guid or UUID. Allows null.
+      billtoparent:
+        type: integer
+        description: boolean
       homephone:
         type: string
       businessphone:
@@ -840,10 +850,13 @@ definitions:
         type: integer
       totalamount:
         type: number
+        description: Currency.
       total:
         type: number
+        description: Currency.
       totalvat:
         type: number
+        description: Currency.
       invoicedate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
@@ -915,10 +928,13 @@ definitions:
         type: number
       totalvat:
         type: number
+        description: Currency.
       unitprice:
         type: number
+        description: Currency.
       totalprice:
         type: number
+        description: Currency.
       invoice:
         type: object
       subscriptioncharge:
@@ -933,6 +949,12 @@ definitions:
       id:
         type: string
         description: Guid or UUID.
+      totalpriceexchangerate:
+        type: number
+        description: Currency.
+      totalpricebasecurrency:
+        type: number
+        description: Currency.
       createddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
