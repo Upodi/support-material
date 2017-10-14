@@ -1,9 +1,9 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.1.3
+  version: 2.1.5
   title: Upodi API
-  description: This documentation is for v2.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
+  description: This documentation is for v3.7 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
 basePath: /v2
 # schemes
