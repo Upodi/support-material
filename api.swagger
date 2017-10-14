@@ -598,8 +598,7 @@ paths:
         type: string
       responses:
         201:
-          description: Created
-          type: string
+          description: Created. Returns the UUID/guid of the new productplan.
 #
 # transactions calls
 #
