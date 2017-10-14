@@ -125,6 +125,46 @@ paths:
       responses:
         204:
           description: No content.
+  /customers/{accountnumber}/accountnumber/:
+    get:
+      summary: customers/{accountNumber}/accountnumber
+      description: Get a customer based on the account number
+      operationId: GetCustomerByCustomerNumber
+      tags:
+      - customer
+      security:
+        - Bearer: []
+      parameters:
+      - name: accountnumber
+        in: path
+        description: Account number of customer
+        required: true
+        type: string
+      responses:
+        200:
+          description: Customer object.
+        404:
+          description: Not found.
+  /customers/{refkey}/refkey/:
+    get:
+      summary: customers/{accountNumber}/refkey
+      description: Get a customer based on the reference key
+      operationId: GetCustomerByRefkey
+      tags:
+      - customer
+      security:
+        - Bearer: []
+      parameters:
+      - name: refkey
+        in: path
+        description: Reference key
+        required: true
+        type: string
+      responses:
+        200:
+          description: Customer object.
+        404:
+          description: Not found.
   /customers/{id}/assigncardtoken/:
     put:
       summary: /customers/:id/assigncardtoken
@@ -149,6 +189,45 @@ paths:
       responses:
         204:
           description: No content.
+#
+# discount calls
+#
+  /discounts:
+    get:
+      summary: /discounts/
+      description: Returns a list of discounts. Requires API scope 'read'.
+      operationId: GetDiscounts
+      tags:
+      - discount
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Discount'
+  /discounts/{id}:
+    get:
+      summary: /discounts/:id
+      description: Returns a single discounts. Requires API scope 'read'.
+      operationId: GetDiscountsById
+      tags:
+      - discount
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of discount.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Discount object.
+        404:
+          description: Not found.
 #
 # subscription calls
 #
@@ -629,6 +708,30 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Activity'
+      createdby:
+        type: string
+        description: Guid or UUID.
+      modifiedby:
+        type: string
+        description: Guid or UUID.
+      createdbyuser:
+        type: object
+      modifiedbyuser:
+        type: object
+      id:
+        type: string
+        description: Guid or UUID.
+      createddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+      modifieddate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  Discount:
+    type: object
+    properties:
+      fullname:
+        type: string
       createdby:
         type: string
         description: Guid or UUID.
