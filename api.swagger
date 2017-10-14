@@ -599,8 +599,7 @@ paths:
       responses:
         201:
           description: Created
-          schema:
-            $ref: '#/definitions/ProductPlan'
+          type: string
 #
 # transactions calls
 #
