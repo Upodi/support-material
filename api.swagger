@@ -393,6 +393,32 @@ paths:
           description: Not found.
         500:
           description: General service error.
+  /subscriptions/{id}/expire/:
+    put:
+      summary: /subscriptions/:id/expire
+      description: |
+        Expire an active subscription. 
+        #### API Token scope
+        * WRITE.
+      tags:
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription
+        required: true
+        type: string
+      responses:
+        204:
+          description: No content. subscription updated.
+        400:
+          description: Bad request.
+        404:
+          description: Not found.
+        500:
+          description: General service error.
 #
 # subscription charges calls
 #
