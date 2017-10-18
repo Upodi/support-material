@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.1.5
+  version: 2.1.9
   title: Upodi API
   description: This documentation is for v3.7 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -109,6 +109,54 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
+  /customers/{id}/paymentmethods:
+    get:
+      summary: /customers/:id/paymentmethods
+      description: Return a list of payment method ids. Requires API scope 'read'.
+      tags:
+      - customer
+      - paymentmethod
+      parameters:
+      - name: id
+        in: path
+        description: ID of customer
+        required: true
+        type: string
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
+        404:
+          description: Not found. No object of id.
+        500:
+          description: General service error.
+  /customers/{id}/invoices:
+    get:
+      summary: /customers/:id/invoices
+      description: Return a list of invoice ids. Requires API scope 'read'.
+      tags:
+      - customer
+      - invoice
+      parameters:
+      - name: id
+        in: path
+        description: ID of customer
+        required: true
+        type: string
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+        404:
+          description: Not found. No object of id.
+        500:
+          description: General service error.
     delete:
       summary: /customers/:id
       description: Delete a single customer. Requires API scope 'write'.
@@ -165,6 +213,27 @@ paths:
           description: Customer object.
         404:
           description: Not found.
+  /customers/{paymentMethodId}/validatepaymentmethod/:
+    get:
+      summary: customers/:paymentMethodId/validatepaymentmethod/
+      description: Validates an associated payment method of a customer.
+      operationId: ValidatePaymentMethod
+      tags:
+      - customer
+      - paymentmethod
+      security:
+        - Bearer: []
+      parameters:
+      - name: paymentMethodId
+        in: path
+        description: Guid.
+        required: true
+        type: string
+      responses:
+        200:
+          description: True or false in body.
+        404:
+          description: Not found.
   /customers/{id}/assigncardtoken/:
     put:
       summary: /customers/:id/assigncardtoken
@@ -186,6 +255,31 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/CardToken'
+      responses:
+        204:
+          description: No content.
+  /customers/{id}/setdefaultpaymentmethod/:
+    put:
+      summary: /customers/:id/setdefaultpaymentmethod
+      description: Assigns a default payment method. Requires API scope 'write'.
+      operationId: SetDefaultPaymentMethod
+      tags:
+      - customer
+      - creditcard
+      - paymentmethod
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of customer
+        required: true
+        type: string
+      - name: paymentmethodid
+        in: body
+        required: true
+        schema: 
+           type: string
       responses:
         204:
           description: No content.
