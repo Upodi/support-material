@@ -1585,9 +1585,6 @@ definitions:
       productplanid:
         type: string
         description: Guid or UUID.
-      switchtoplanid:
-        type: string
-        description: Guid or UUID.
       subscriptionnumber:
         type: string
       autorenew:
