@@ -837,18 +837,25 @@ definitions:
     properties:
       accountnumber:
         type: string
+        maxLength: 50
       companyname:
         type: string
+        maxLength: 50
       companyvat:
         type: string
+        maxLength: 50
       fullname:
         type: string
+        maxLength: 50
       refkey:
         type: string
+        maxLength: 50
       primaryemail:
         type: string
+        maxLength: 250
       currencycode:
         type: string
+        maxLength: 5
       autobill:
         type: integer
         description: Boolean.
