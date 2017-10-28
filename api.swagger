@@ -858,7 +858,7 @@ definitions:
         type: string
         maxLength: 5
       autobill:
-        type: integer
+        type: boolean
         description: Boolean.
       paymentmethod:
         type: string
@@ -871,24 +871,34 @@ definitions:
         description: boolean
       homephone:
         type: string
+        maxLength: 50
       businessphone:
         type: string
+        maxLength: 50
       mobilephone:
         type: string
+        maxLength: 50
       addressline1:
         type: string
+        maxLength: 50
       addressline2:
         type: string
+        maxLength: 50
       city:
         type: string
+        maxLength: 50
       postalcode:
         type: string
+        maxLength: 10
       country:
         type: string
+        maxLength: 40
       county:
         type: string
+        maxLength: 40
       state:
         type: string
+        maxLength: 40
       defaultpaymentmethod:
         type: object
       currency:
