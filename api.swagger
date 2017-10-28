@@ -853,6 +853,7 @@ definitions:
       primaryemail:
         type: string
         maxLength: 250
+        format: email
       currencycode:
         type: string
         maxLength: 5
