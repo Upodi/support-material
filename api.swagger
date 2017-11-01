@@ -629,6 +629,32 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Invoice'
+  /invoices/{invoicenumber}/number/:
+    get:
+      summary: /invoices/:invoicenumber/number
+      description: Get a invoice based on the invoice number. Requires API scope 'read'.
+      operationId: GetInvoiceByNumber
+      tags:
+      - invoice
+      security:
+        - Bearer: []
+      parameters:
+      - name: invoicenumber
+        in: path
+        description: Invoice number of invoice
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Invoice'
+        400:
+          description: Bad request.
+        404:
+          description: Not found. No invoice by id.
+        500:
+          description: General service error.
   /invoices/{id}/markpaid/:
     put:
       summary: /invoices/:id/markpaid/
@@ -657,6 +683,40 @@ paths:
       responses:
         204:
           description: OK. Invoice paid.
+        400:
+          description: Bad request.
+        404:
+          description: Not found. No invoice by id.
+        500:
+          description: General service error.
+  /invoices/{id}/cancel/:
+    put:
+      summary: /invoices/:id/cancel/
+      description: |
+        Mark an invoice as cancelled.
+        #### API Token scope
+        * WRITE.
+      operationId: PutInvoiceCancel
+      tags:
+      - invoice
+      parameters:
+      - name: id
+        in: path
+        description: ID of invoice
+        required: true
+        type: string
+      - name: date
+        in: body
+        description: Date upon the invoice was paid.
+        schema:
+          type: string
+          description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+        required: true
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: OK. Invoice cancelled.
         400:
           description: Bad request.
         404:
