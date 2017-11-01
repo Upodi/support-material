@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.1.9
+  version: 2.2.1
   title: Upodi API
   description: This documentation is for v3.7 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -133,36 +133,7 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
-    post:
-      summary: /customers/{id}/paymentMethodFromToken/
-      description: | 
-        Creates a pament method from token on a customer and return the id. Same as assign token, but has option to make paymentMethod as default.
-        ##### API Token scope
-        * WRITE.
-      operationId: CreatePaymentMethodfromToken
-      tags:
-      - customer
-      security:
-        - Bearer: []
-      parameters:
-        - name: id
-          in: path
-          description: ID of customer
-          required: true
-          type: string
-        - name: cardToken
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/CardToken'
-      responses:
-        201:
-          description: Created. Body contains the id of the newly created object.
-        400:
-          description: Bad request. Invalid fields of object.
-        500:
-          description: General service error.
-  /customers/{id}/invoices/:
+  /customers/{id}/invoices:
     get:
       summary: /customers/:id/invoices
       description: Return a list of invoice ids. Requires API scope 'read'.
@@ -493,7 +464,7 @@ paths:
   /subscriptions/{id}/switchplan/:
     put:
       summary: /subscriptions/:id/switchplan
-      description: Switch a plan on a subscription to a new plan. This MUST be configured to allow switching.
+      description: Switch a subscription plan from one to another.
       tags:
       - subscription
       security:
@@ -506,9 +477,10 @@ paths:
         type: string
       - name: toplan
         in: body
-        description: ID of the new product plan to switch to.
+        description: The new id of the product plan to switch to.
+        schema:
+          type: string
         required: true
-        type: string
       responses:
         204:
           description: No content.
@@ -762,13 +734,6 @@ paths:
         description: ID of invoice
         required: true
         type: string
-      - name: date
-        in: body
-        description: Date upon the invoice was paid.
-        schema:
-          type: string
-          description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-        required: true
       security:
         - Bearer: []
       responses:
@@ -784,7 +749,7 @@ paths:
     put:
       summary: /invoices/:id/recharge/
       description: |
-        Recharge an invoice. Only works on invoices for payment due.
+        Recharge a failed payment of an invoice.
         #### API Token scope
         * WRITE.
       operationId: PutInvoiceRecharge
@@ -796,20 +761,13 @@ paths:
         description: ID of invoice
         required: true
         type: string
-      - name: date
-        in: body
-        description: Date upon the invoice was paid.
-        schema:
-          type: string
-          description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-        required: true
       security:
         - Bearer: []
       responses:
         204:
-          description: OK. Invoice set for recharge.
+          description: OK. Invoice cancelled.
         400:
-          description: Bad request. Might be due to the invoice allready been paid or is a draft.
+          description: Bad request.
         404:
           description: Not found. No invoice by id.
         500:
