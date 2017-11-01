@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.1
+  version: 2.1.9
   title: Upodi API
   description: This documentation is for v3.7 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -380,6 +380,38 @@ paths:
         404:
           description: Not found.
 #
+# payment methods
+#
+  /paymentmethods/{customerid}/:
+    post:
+      summary: /paymentmethods/:customerid
+      description: Created a new payment method on a customer. Requires API scope 'write'.
+      operationId: PostPaymentMethod
+      tags:
+      - customer
+      - paymentmethod
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: customerid
+        in: path
+        description: ID of customer.
+        required: true
+        type: string
+      - name: paymentMethod
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CreatePaymentMethod'
+      responses:
+        201:
+          description: Created. Body contains the id of the newly created object.
+        400:
+          description: Bad request. Invalid fields of object.
+        500:
+          description: General service error.
+#
 # subscription calls
 #
   /subscriptions:
@@ -483,7 +515,7 @@ paths:
         required: true
       responses:
         204:
-          description: No content.
+          description: No content, but succesful switched.
         400:
           description: Bad request.
         404:
@@ -1084,6 +1116,27 @@ definitions:
       modifieddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  CreatePaymentMethod:
+    type: object
+    properties:
+      type: 
+        type: integer
+        description: Describes the type of the payment method to create. 8= creditcard, 64=pure token (external), 128=fi
+      makedefault:
+        type: boolean
+        description: If set true the payment method will be set as default on the customer.
+      token:
+        type: string
+        description: Optional. Token of an external payment gateway.
+      paymentgateway:
+        type: string
+        description: Optional. Name of the payment gateway to use.
+      fi:
+        type: object
+        description: Optional. FI object with property FiCustomerNumber as string.
+      cardtoken:
+        type: string
+        description: Optional. Upodi token from upodi.js here.
   EmailTemplate:
     type: object
     properties:
