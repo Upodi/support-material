@@ -380,7 +380,7 @@ paths:
         404:
           description: Not found.
 #
-# payment methods
+# payment methods calls
 #
   /paymentmethods/{customerid}/:
     post:
@@ -411,6 +411,19 @@ paths:
           description: Bad request. Invalid fields of object.
         500:
           description: General service error.
+  /paymentmethods/:
+    get:
+      summary: /paymentmethods/
+      description: Returns a list of payment method. Requires API scope 'read'.
+      tags:
+      - paymentmethod
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
 #
 # subscription calls
 #
