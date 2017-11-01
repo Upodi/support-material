@@ -109,7 +109,7 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
-  /customers/{id}/paymentmethods:
+  /customers/{id}/paymentmethods/:
     get:
       summary: /customers/:id/paymentmethods
       description: Return a list of payment method ids. Requires API scope 'read'.
@@ -133,7 +133,36 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
-  /customers/{id}/invoices:
+    post:
+      summary: /customers/{id}/paymentMethodFromToken/
+      description: | 
+        Creates a pament method from token on a customer and return the id. Same as assign token, but has option to make paymentMethod as default.
+        ##### API Token scope
+        * WRITE.
+      operationId: CreatePaymentMethodfromToken
+      tags:
+      - customer
+      security:
+        - Bearer: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of customer
+          required: true
+          type: string
+        - name: cardToken
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CardToken'
+      responses:
+        201:
+          description: Created. Body contains the id of the newly created object.
+        400:
+          description: Bad request. Invalid fields of object.
+        500:
+          description: General service error.
+  /customers/{id}/invoices/:
     get:
       summary: /customers/:id/invoices
       description: Return a list of invoice ids. Requires API scope 'read'.
@@ -461,6 +490,34 @@ paths:
           description: Not found.
         500:
           description: General service error.
+  /subscriptions/{id}/switchplan/:
+    put:
+      summary: /subscriptions/:id/switchplan
+      description: Switch a plan on a subscription to a new plan. This MUST be configured to allow switching.
+      tags:
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription
+        required: true
+        type: string
+      - name: toplan
+        in: body
+        description: ID of the new product plan to switch to.
+        required: true
+        type: string
+      responses:
+        204:
+          description: No content.
+        400:
+          description: Bad request.
+        404:
+          description: Not found.
+        500:
+          description: General service error.
   /subscriptions/{id}/cancel/:
     put:
       summary: /subscriptions/:id/cancel
@@ -723,6 +780,40 @@ paths:
           description: Not found. No invoice by id.
         500:
           description: General service error.
+  /invoices/{id}/recharge/:
+    put:
+      summary: /invoices/:id/recharge/
+      description: |
+        Recharge an invoice. Only works on invoices for payment due.
+        #### API Token scope
+        * WRITE.
+      operationId: PutInvoiceRecharge
+      tags:
+      - invoice
+      parameters:
+      - name: id
+        in: path
+        description: ID of invoice
+        required: true
+        type: string
+      - name: date
+        in: body
+        description: Date upon the invoice was paid.
+        schema:
+          type: string
+          description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+        required: true
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: OK. Invoice set for recharge.
+        400:
+          description: Bad request. Might be due to the invoice allready been paid or is a draft.
+        404:
+          description: Not found. No invoice by id.
+        500:
+          description: General service error.
 #
 # product plan calls
 #
@@ -867,9 +958,14 @@ definitions:
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   CardToken:
     type: object
+    required:
+      - token
     properties:
       token:
         type: string
+      makedefault:
+          type: integer
+          description: boolean
   Currency:
     type: object
     properties:
