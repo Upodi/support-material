@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.1
+  version: 2.2.2
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -425,7 +425,58 @@ paths:
 #
 # payment methods calls
 #
-  /paymentmethods/{customerid}/:
+  /paymentmethods/:
+    get:
+      summary: /paymentmethods/
+      description: Returns a list of payment method. Requires API scope 'read'.
+      tags:
+      - paymentmethod
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
+  /paymentmethods/{id}/:
+    get:
+      summary: /paymentmethods/:id
+      description: Returns a payment method by id. Requires API scope 'read'.
+      tags:
+      - paymentmethod
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of payment method.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
+  /paymentmethods/{customerid}/bycustomer/:
+    get:
+      summary: /paymentmethods/:customerid/bycustomer
+      description: Returns a paymenthod by customer id. Requires API scope 'read'.
+      tags:
+      - paymentmethod
+      security:
+        - Bearer: []
+      parameters:
+      - name: customerid
+        in: path
+        description: ID of customer.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentMethod'
+  /paymentmethods/{customerid}:
     post:
       summary: /paymentmethods/:customerid/
       description: Created a new payment method on a customer. Requires API scope 'write'.
@@ -454,19 +505,6 @@ paths:
           description: Bad request. Invalid fields of object.
         500:
           description: General service error.
-  /paymentmethods/:
-    get:
-      summary: /paymentmethods/
-      description: Returns a list of payment method. Requires API scope 'read'.
-      tags:
-      - paymentmethod
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/PaymentMethod'
 #
 # subscription calls
 #
