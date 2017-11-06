@@ -427,13 +427,13 @@ paths:
 #
   /paymentmethods/{customerid}/:
     post:
-      summary: /paymentmethods/:customerid
+      summary: /paymentmethods/:customerid/
       description: Created a new payment method on a customer. Requires API scope 'write'.
       operationId: PostPaymentMethod
       tags:
-      - customer
       - paymentmethod
       - subscription
+      - customer
       security:
         - Bearer: []
       parameters:
