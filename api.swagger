@@ -379,6 +379,49 @@ paths:
           description: Discount appled.
         404:
           description: Not found.
+  /discounts/{id}/cleardiscountcodecustomer:
+    delete:
+      summary: /discounts/:id/cleardiscountcodecustomer
+      description: Clear a discount from a customer. Requires API scope 'write'.
+      operationId: ClearDiscountCodeCustomer
+      tags:
+      - discount
+      - customer
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of customer.
+        required: true
+        type: string
+      responses:
+        204:
+          description: Discount removed.
+        404:
+          description: Not found.
+  /discounts/{id}/cleardiscountcodesubscription:
+    delete:
+      summary: /discounts/:id/cleardiscountcodesubscription
+      description: Clear a discount from a subscription. Requires API scope 'write'.
+      operationId: ClearDiscountCodeSubscription
+      tags:
+      - discount
+      - customer
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription.
+        required: true
+        type: string
+      responses:
+        204:
+          description: Discount removed.
+        404:
+          description: Not found.
 #
 # payment methods calls
 #
