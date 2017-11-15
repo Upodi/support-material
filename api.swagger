@@ -1219,18 +1219,54 @@ definitions:
       makedefault:
         type: boolean
         description: If set true the payment method will be set as default on the customer.
-      token:
-        type: string
-        description: Optional. Token of an external payment gateway.
-      paymentgateway:
-        type: string
-        description: Optional. Name of the payment gateway to use.
+      puretoken:
+        description: Optional. For use of 3rd party token gateways.
+        $ref: '#/definitions/PureTokenObject'
+      ls:
+        description: Optional.
+        $ref: '#/definitions/LsObject'
       fi:
-        type: object
         description: Optional. FI object with property FiCustomerNumber as string.
+        $ref: '#/definitions/FiObject'
+      creditcard:
+        description: Optional. Upodi token from upodi.js here.
+        $ref: '#/definitions/CreditcardObject'
+  LsObject:
+    type: object
+    properties:
+      debtornumber: 
+        type: string
+      regnumber:
+        type: string
+      accountnumber:
+        type: string
+      cvrnumber:
+        type: string
+      lscreditornumber:
+        type: string
+        description
+  CreditcardObject:
+    type: object
+    properties:
       cardtoken:
         type: string
         description: Optional. Upodi token from upodi.js here.
+  FiObject:
+    type: object
+    properties:
+      ficustomernumber:
+        type: string
+        description: Optional. FI customer number.
+  PureTokenObject:
+    type: object
+    properties:
+      token:
+        type: string
+        description: Optional. Name of the payment gateway to use.
+      paymentgateway:
+        type: string
+        description: Optional. Name of the payment gateway to use.
+  
   EmailTemplate:
     type: object
     properties:
