@@ -731,6 +731,25 @@ paths:
       responses:
         204:
           description: OK
+  /subscriptionCharges/{id}/setamount/:
+    put:
+      summary: /subscriptioncharges/:id/hold/
+      description: Hold a given subscription charge.
+      operationId: PutSubscriptionChargeHold
+      tags:
+      - subscriptioncharge
+      - subscription
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription charge
+        required: true
+        type: string
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: OK
 #
 # time calls
 #
