@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.3
+  version: 2.2.4
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -731,7 +731,7 @@ paths:
       responses:
         204:
           description: OK
-  /subscriptionCharges/{id}/setamount/:
+  /subscriptionCharges/{id}/hold/:
     put:
       summary: /subscriptioncharges/:id/hold/
       description: Hold a given subscription charge.
