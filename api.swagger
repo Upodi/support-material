@@ -379,6 +379,35 @@ paths:
           description: Discount appled.
         404:
           description: Not found.
+  /discounts/{id}/applydiscountcodesubscriptioncharge:
+    put:
+      summary: /discounts/:id/applydiscountcodesubscriptioncharge
+      description: Applies a discount to a subscription charge. Requires API scope 'write'.
+      operationId: ApplyDiscountCodeSubscriptionCharge
+      tags:
+      - discount
+      - customer
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription charge.
+        required: true
+        type: string
+      - name: discountcode
+        description: Discount code (string).
+        in: body
+        schema:
+          type: string
+          description: Discount code (string).
+        required: true
+      responses:
+        204:
+          description: Discount appled.
+        404:
+          description: Not found.
   /discounts/{id}/cleardiscountcodecustomer:
     delete:
       summary: /discounts/:id/cleardiscountcodecustomer
@@ -621,6 +650,32 @@ paths:
       summary: /subscriptions/:id/cancel
       description: |
         Cancels an active subscription. 
+        #### API Token scope
+        * WRITE.
+      tags:
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription
+        required: true
+        type: string
+      responses:
+        204:
+          description: No content. subscription updated.
+        400:
+          description: Bad request.
+        404:
+          description: Not found.
+        500:
+          description: General service error.
+  /subscriptions/{id}/hold/:
+    put:
+      summary: /subscriptions/:id/hold
+      description: |
+        Holds an active subscription. 
         #### API Token scope
         * WRITE.
       tags:
