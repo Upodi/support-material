@@ -1344,7 +1344,6 @@ definitions:
       paymentgateway:
         type: string
         description: Optional. Name of the payment gateway to use.
-  
   EmailTemplate:
     type: object
     properties:
@@ -1543,8 +1542,6 @@ definitions:
         description: Guid or UUID.
       currencycode:
         type: string
-      invoicecounter:
-        type: integer
       invoicecounter:
         type: integer
       invoicenumeric:
