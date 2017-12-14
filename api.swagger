@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.4
+  version: 2.2.6
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1545,7 +1545,9 @@ definitions:
         type: string
       invoicecounter:
         type: integer
-      totalamount:
+      invoicecounter:
+        type: integer
+      invoicenumeric:
         type: number
         description: Currency.
       total:
@@ -1560,6 +1562,9 @@ definitions:
       duedate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+      paymentdescriptor:
+        type: string
+        description: Description of the payment method used on the invoice.
       paymentdate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
@@ -1652,6 +1657,12 @@ definitions:
       totalpricebasecurrency:
         type: number
         description: Currency.
+      periodstart:
+        type: string
+        description: Date RFC 3339 format. YYYY-MM-DDZ.
+      periodend:
+        type: string
+        description: Date RFC 3339 format. YYYY-MM-DDZ.
       createddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
