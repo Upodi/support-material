@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.6
+  version: 2.2.7
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1544,9 +1544,10 @@ definitions:
         type: string
       invoicecounter:
         type: integer
+        description: invoice counter.
       invoicenumeric:
         type: number
-        description: Currency.
+        description: numeric invoice number.
       total:
         type: number
         description: Currency.
@@ -1569,6 +1570,7 @@ definitions:
         type: integer
       invoicenumber:
         type: string
+        description: Text representation of invoice.
       subscription:
         type: object
       customer:
@@ -1585,6 +1587,14 @@ definitions:
       dunningstep:
         type: integer
         description: Allows null.
+      externalfinance:
+        type: string
+        description: External ID of ERP integration.
+      externalstatecode:
+        type: integer
+      refkey:
+        type: string
+        description: Used for integrational purposes. Custom track keys can be stored here.
       nextretry:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
