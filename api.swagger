@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.0
+  version: 2.3.1
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -97,13 +97,14 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of customer
+        description: ID of customer. Guid or UUID.
         required: true
         type: string
       security:
         - Bearer: []
       responses:
         200:
+          description: OK
           schema:
             $ref: '#/definitions/Customer'
         400:
@@ -146,7 +147,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of customer
+        description: ID of customer.  Guid or UUID.
         required: true
         type: string
       security:
@@ -250,7 +251,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of customer
+        description: ID of customer. Guid or UUID.
         required: true
         type: string
       - name: cardToken
@@ -317,7 +318,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of discount.
+        description: ID of discount.  Guid or UUID.
         required: true
         type: string
       responses:
@@ -367,7 +368,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription.
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       - name: discountcode
@@ -424,7 +425,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of customer.
+        description: ID of customer. Guid or UUID.
         required: true
         type: string
       responses:
@@ -481,7 +482,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of payment method.
+        description: ID of payment method. Guid or UUID.
         required: true
         type: string
       responses:
@@ -500,7 +501,7 @@ paths:
       parameters:
       - name: customerid
         in: path
-        description: ID of customer.
+        description: ID of customer. Guid or UUID.
         required: true
         type: string
       responses:
@@ -522,7 +523,7 @@ paths:
       parameters:
       - name: customerid
         in: path
-        description: ID of customer.
+        description: ID of customer. Guid or UUID.
         required: true
         type: string
       - name: paymentMethod
@@ -590,7 +591,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       responses:
@@ -609,7 +610,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       responses:
@@ -632,7 +633,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       - name: toplan
@@ -664,7 +665,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       responses:
@@ -690,7 +691,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       responses:
@@ -716,7 +717,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription
+        description: ID of subscription. Guid or UUID.
         required: true
         type: string
       responses:
@@ -759,7 +760,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription charge
+        description: ID of subscription charge. Guid or UUID.
         required: true
         type: string
       responses:
@@ -777,7 +778,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription charge
+        description: ID of subscription charge. Guid or UUID.
         required: true
         type: string
       - name: newAmount
@@ -802,7 +803,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of subscription charge
+        description: ID of subscription charge. Guid or UUID.
         required: true
         type: string
       security:
@@ -902,7 +903,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of invoice
+        description: ID of invoice. Guid or UUID.
         required: true
         type: string
       - name: date
@@ -936,7 +937,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of invoice
+        description: ID of invoice. Guid or UUID.
         required: true
         type: string
       security:
@@ -963,7 +964,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of invoice
+        description: ID of invoice. Guid or UUID.
         required: true
         type: string
       security:
@@ -1007,7 +1008,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of product plan
+        description: ID of product plan. Guid or UUID.
         required: true
         type: string
       responses:
@@ -1027,7 +1028,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of product plan
+        description: ID of product plan. Guid or UUID.
         required: true
         type: string
       responses:
@@ -1064,7 +1065,7 @@ paths:
       parameters:
       - name: id
         in: path
-        description: ID of transaction
+        description: ID of transaction. Guid or UUID.
         required: true
         type: string
       responses:
@@ -1178,6 +1179,7 @@ definitions:
         type: string
         maxLength: 250
         format: email
+        description: E-mail of customer.
       currencycode:
         type: string
         maxLength: 5
@@ -1218,14 +1220,18 @@ definitions:
       country:
         type: string
         maxLength: 40
+        description: Address country.
       county:
         type: string
         maxLength: 40
+        description: Address county.
       state:
         type: string
         maxLength: 40
+        description: Address state.
       defaultpaymentmethod:
         type: object
+        description: PaymentMethod object.
       currency:
         type: object
       subscriptions:
