@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.9
+  version: 2.3.0
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -572,6 +572,8 @@ paths:
       responses:
         201:
           description: Created. Body contains the id of the newly created object.
+          schema:
+            $ref: '#/definitions/CreatedResponse'
         400:
           description: Bad request. Invalid fields of object.
         500:
@@ -1227,16 +1229,20 @@ definitions:
         type: object
       subscriptions:
         type: array
-        description: Array of subscription objects.
+        items:
+          $ref: '#/definitions/Subscription'
       invoices:
         type: array
-        description: Array of invoice objects.
+        items:
+          $ref: '#/definitions/Invoice'
       paymentmethods:
         type: array
-        description: Array of paymentmethod objects.
+        items:
+          $ref: '#/definitions/PaymentMethod'
       subscriptioncharges:
         type: array
-        description: Array of subscriptioncharge objects.
+        items:
+          $ref: '#/definitions/SubscriptionCharge'
       transactions:
         type: array
         items:
