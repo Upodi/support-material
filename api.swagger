@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.2.8
+  version: 2.2.9
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1227,20 +1227,16 @@ definitions:
         type: object
       subscriptions:
         type: array
-        items:
-          $ref: '#/definitions/Subscription'
+        description: Array of subscription objects.
       invoices:
         type: array
-        items:
-          $ref: '#/definitions/Invoice'
+        description: Array of invoice objects.
       paymentmethods:
         type: array
-        items:
-          $ref: '#/definitions/PaymentMethod'
+        description: Array of paymentmethod objects.
       subscriptioncharges:
         type: array
-        items:
-          $ref: '#/definitions/SubscriptionCharge'
+        description: Array of subscriptioncharge objects.
       transactions:
         type: array
         items:
