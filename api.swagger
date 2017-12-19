@@ -104,9 +104,10 @@ paths:
         - Bearer: []
       responses:
         200:
-          description: OK
           schema:
             $ref: '#/definitions/Customer'
+        400:
+          description: Malformed request.
         404:
           description: Not found. No object of id.
         500:
@@ -2016,8 +2017,10 @@ definitions:
         description: Boolean.
       statecode:
         type: integer
+        description: 0=active, 1=renewing, 2=grace, 3=expired, 4=cancelled, 5=draft, 6=pendingending, 7=ended
       status:
         type: integer
+        description: 1024=deleted, 7=inactive, 1=active, 0=draft.
       startdate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
@@ -2131,6 +2134,7 @@ definitions:
         type: object
       statecode:
         type: integer
+        description: draft=0,active=1,inactive=7,deleted=1024.
       createdby:
         type: string
         description: Guid or UUID.
