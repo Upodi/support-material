@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.2
+  version: 2.3.3
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -113,6 +113,22 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
+    delete:
+      summary: /customers/:id
+      description: Delete a single customer. Requires API scope 'write'.
+      tags:
+      - customer
+      parameters:
+      - name: id
+        in: path
+        description: ID of customer
+        required: true
+        type: string
+      security:
+        - Bearer: []
+      responses:
+        204:
+          description: No content.
   /customers/{id}/paymentmethods/:
     get:
       summary: /customers/:id/paymentmethods
@@ -161,22 +177,6 @@ paths:
           description: Not found. No object of id.
         500:
           description: General service error.
-    delete:
-      summary: /customers/:id
-      description: Delete a single customer. Requires API scope 'write'.
-      tags:
-      - customer
-      parameters:
-      - name: id
-        in: path
-        description: ID of customer
-        required: true
-        type: string
-      security:
-        - Bearer: []
-      responses:
-        204:
-          description: No content.
   /customers/{accountnumber}/accountnumber/:
     get:
       summary: customers/{accountNumber}/accountnumber
