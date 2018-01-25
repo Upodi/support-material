@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.5
+  version: 2.3.6
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1328,9 +1328,6 @@ definitions:
   LsObject:
     type: object
     properties:
-      payerid: 
-        type: string
-        description: Required. debtor number.
       bankregnumber:
         type: string
         description: Required. bank registration number (example 9890).
@@ -1340,9 +1337,6 @@ definitions:
       cvrnumber:
         type: string
         description: Required. CVR number.
-      lscreditornumber:
-        type: string
-        description: Required. creditor number
   CreditcardObject:
     type: object
     properties:
