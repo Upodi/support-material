@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.6
+  version: 2.3.7
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1317,7 +1317,7 @@ definitions:
         description: Optional. For use of 3rd party token gateways.
         $ref: '#/definitions/PureTokenObject'
       ls:
-        description: Optional.
+        description: Optional. LS object with properties. See LsObject.
         $ref: '#/definitions/LsObject'
       fi:
         description: Optional. FI object with property FiCustomerNumber as string.
