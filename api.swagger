@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.3
+  version: 2.3.4
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1336,7 +1336,7 @@ definitions:
         description: Required. reg number.
       accountnumber:
         type: string
-        description: Required. CVR number.
+        description: Required. Account number.
       cvrnumber:
         type: string
         description: Required. CVR number.
@@ -1360,10 +1360,10 @@ definitions:
     properties:
       token:
         type: string
-        description: Optional. Name of the payment gateway to use.
+        description: Required. Token in plain text.
       paymentgateway:
         type: string
-        description: Optional. Name of the payment gateway to use.
+        description: Required. Name of the payment gateway to use, example 'quickpay', 'epay', 'stripe' etc.
   EmailTemplate:
     type: object
     properties:
