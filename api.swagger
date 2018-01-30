@@ -2020,7 +2020,7 @@ definitions:
         description: Boolean.
       statecode:
         type: integer
-        description: 0=active, 1=renewing, 2=grace, 3=expired, 4=cancelled, 5=draft, 6=pendingending, 7=ended
+        description: 0=active, 1=renewing, 2=grace, 3=expired, 4=cancelled, 5=draft, 6=pendingending, 7=ended, 8=hold
       status:
         type: integer
         description: 1024=deleted, 7=inactive, 1=active, 0=draft.
