@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.7
+  version: 2.3.8
   title: Upodi API
   description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -677,6 +677,32 @@ paths:
           description: Not found.
         500:
           description: General service error.
+  /subscriptions/{id}/resume/:
+    put:
+      summary: /subscriptions/:id/resume
+      description: |
+        Resume a hold subscription. 
+        #### API Token scope
+        * WRITE.
+      tags:
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription. Guid or UUID.
+        required: true
+        type: string
+      responses:
+        204:
+          description: No content. subscription resumed.
+        400:
+          description: Bad request.
+        404:
+          description: Not found.
+        500:
+          description: General service error.
   /subscriptions/{id}/hold/:
     put:
       summary: /subscriptions/:id/hold
@@ -1229,6 +1255,9 @@ definitions:
         type: string
         maxLength: 40
         description: Address state.
+      note:
+        type: string
+        description: Note field for various information.
       defaultpaymentmethod:
         type: object
         description: PaymentMethod object.
