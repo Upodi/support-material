@@ -1,9 +1,9 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.3.8
+  version: 2.4.0
   title: Upodi API
-  description: This documentation is for v3.8 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
+  description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
 basePath: /v2
 # schemes
@@ -890,6 +890,54 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Invoice'
+  /invoices/{id}/getpdfwithid:
+    get:
+      summary: /invoices/:id/getpdfwithid
+      description: Get a invoice based on the id. Requires API scope 'read'. To retrieve a file download please provide content-type 'application/pdf'.
+      operationId: GetInvoicePdfById
+      tags:
+      - invoice
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of invoice
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK. File content of PDF.
+        400:
+          description: Bad request.
+        404:
+          description: Not found. No invoice by id, or there is not e-mail template defined.
+        500:
+          description: General service error.
+  /invoices/{invoicenumber}/getpdfwithinvoicenumber:
+    get:
+      summary: /invoices/:invoicenumber/getpdfwithinvoicenumber
+      description: Get a invoice based on the invoice number. Requires API scope 'read'. To retrieve a file download please provide content-type 'application/pdf'.
+      operationId: GetInvoicePdfByNumber
+      tags:
+      - invoice
+      security:
+        - Bearer: []
+      parameters:
+      - name: invoicenumber
+        in: path
+        description: Invoice number of the invoice.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK. File content of PDF.
+        400:
+          description: Bad request.
+        404:
+          description: Not found. No invoice by invoice number, or there is not e-mail template defined.
+        500:
+          description: General service error.
   /invoices/{invoicenumber}/number/:
     get:
       summary: /invoices/:invoicenumber/number
@@ -2153,6 +2201,9 @@ definitions:
         type: string
       description:
         type: string
+      toggled:
+        type: integer
+        description: boolean. Set by Upodi.
       ismanual:
         type: integer
         description: Boolean.
