@@ -177,7 +177,7 @@ paths:
             type: array
             items:
               type: string
-              example: ["guid", "guid", ...]
+            example: ["guid", "guid", "guid"]
         404:
           description: Not found. No object of id.
         500:
