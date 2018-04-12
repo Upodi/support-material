@@ -62,6 +62,8 @@ paths:
             $ref: '#/definitions/CreatedResponse'
         400:
           description: Bad request. Invalid fields of object.
+        422:
+          description: Dublicate. Check accountnumber.
         500:
           description: General service error.
     put:
@@ -156,7 +158,7 @@ paths:
   /customers/{id}/invoices:
     get:
       summary: /customers/:id/invoices
-      description: Return a list of invoice ids. Requires API scope 'read'.
+      description: Return a list of invoice ids as a string array. Requires API scope 'read'.
       tags:
       - customer
       - invoice
@@ -172,7 +174,9 @@ paths:
         200:
           description: OK
           schema:
-            $ref: '#/definitions/Invoice'
+            type: array
+            items:
+              type: string
         404:
           description: Not found. No object of id.
         500:
