@@ -576,6 +576,7 @@ paths:
         schema:
           type: string
           description: Discount code (string).
+          example: "discount-24M24klm2kl"
         required: true
       responses:
         200:
