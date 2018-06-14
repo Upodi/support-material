@@ -2423,18 +2423,18 @@ definitions:
       customprice:
         type: number
         description: Optimal. Decimal of custom pricing. If provided, custom pricing is applied. Set customprice to 0 to reset.
-SubscriptionSetAmountRequest:
-    type: object
-    properties:
-      quantity:
-        type: number
-        description: Decimal of the new amount.
-      productplanchargeid:
-        type: string
-        description: Guid or UUID. Spefiic id of productplancharge..
-      all:
-        type: boolean
-        description: If specified true, will ignore productplanchargeid, and set quantity across all charges.
+  SubscriptionSetAmountRequest:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: Decimal of the new amount.
+        productplanchargeid:
+          type: string
+          description: Guid or UUID. Spefiic id of productplancharge..
+        all:
+          type: boolean
+          description: If specified true, will ignore productplanchargeid, and set quantity across all charges.
   SubscriptionCharge:
     type: object
     properties:
