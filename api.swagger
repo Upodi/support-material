@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.5.0
+  version: 2.5.1
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -136,8 +136,8 @@ paths:
       summary: /customers/:id/paymentmethods
       description: Return a list of payment method ids. Requires API scope 'read'.
       tags:
-      - customer
       - paymentmethod
+      - customer
       parameters:
       - name: id
         in: path
@@ -161,7 +161,6 @@ paths:
       description: Return a list of invoice ids as a string array. Requires API scope 'read'.
       tags:
       - customer
-      - invoice
       parameters:
       - name: id
         in: path
@@ -228,8 +227,8 @@ paths:
       description: Validates an associated payment method of a customer.
       operationId: ValidatePaymentMethod
       tags:
-      - customer
       - paymentmethod
+      - customer
       security:
         - Bearer: []
       parameters:
@@ -249,8 +248,8 @@ paths:
       description: Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.
       operationId: AssignCardToken
       tags:
+      - paymentmethod
       - customer
-      - creditcard
       security:
         - Bearer: []
       parameters:
@@ -273,9 +272,8 @@ paths:
       description: Assigns a default payment method. Requires API scope 'write'.
       operationId: SetDefaultPaymentMethod
       tags:
-      - customer
-      - creditcard
       - paymentmethod
+      - customer
       security:
         - Bearer: []
       parameters:
@@ -577,7 +575,7 @@ paths:
         in: body
         schema:
           type: string
-          description: Discount code (string), without curly {}.
+          description: Discount code (string).
         required: true
       responses:
         200:
@@ -2002,57 +2000,6 @@ definitions:
         type: object
       paymentdata:
         type: string
-  PaymentProvider:
-    type: object
-    properties:
-      fullname:
-        type: string
-      typename:
-        type: string
-      settings:
-        type: string
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  ProductFamily:
-    type: object
-    properties:
-      fullname:
-        type: string
-      productplans:
-        type: array
-        items:
-          $ref: '#/definitions/ProductPlan'
-      dunningschemeid:
-        type: string
-        description: Guid or UUID. Allows null.
-      dunningscheme:
-        type: object
-      createdby:
-        type: string
-        description: Guid or UUID.
-      modifiedby:
-        type: string
-        description: Guid or UUID.
-      createdbyuser:
-        type: object
-      modifiedbyuser:
-        type: object
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
   ProductPlan:
     type: object
     properties:
@@ -2195,87 +2142,6 @@ definitions:
         type: object
       productplan:
         type: object
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  Task:
-    type: object
-    properties:
-      fullname:
-        type: string
-      isrecurrent:
-        type: integer
-        description: Boolean.
-      taskdate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  TaxRule:
-    type: object
-    properties:
-      fullname:
-        type: string
-      priority:
-        type: integer
-      country:
-        type: string
-      state:
-        type: string
-      ruletype:
-        type: string
-      taxpct:
-        type: number
-      id:
-        type: string
-        description: Guid or UUID.
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  UserProfile:
-    type: object
-    properties:
-      id:
-        type: string
-        description: Guid or UUID.
-      fullname:
-        type: string
-      createddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-      modifieddate:
-        type: string
-        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
-  Webhook:
-    type: object
-    properties:
-      fullname:
-        type: string
-      authenticitysecret:
-        type: string
-      url:
-        type: string
-      status:
-        type: integer
-      isactive:
-        type: integer
-        description: Boolean.
       id:
         type: string
         description: Guid or UUID.
