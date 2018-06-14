@@ -460,6 +460,32 @@ paths:
           description: Discount removed.
         404:
           description: Not found.
+  /discounts/discountcode:
+    delete:
+      summary: /discounts/discountcode/
+      description: Deletes a discount code if not in use or already consumed.
+      operationId: DeleteDiscountCode
+      tags:
+      - discount
+      - customer
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: discountCode
+        in: body
+        description: Discount code (full), ex. test-LwRkAOac
+        required: true
+        type: string
+      responses:
+        200:
+          description: Discount code removed.
+        204:
+          description: Discount code removed.
+        400:
+          description: Discount code is in use and cannot be removed or body is empty.
+        404:
+          description: Discount code not found.      
 #
 # payment methods calls
 #
