@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.4.0
+  version: 2.5.0
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -569,8 +569,6 @@ paths:
       operationId: DeleteDiscountCode
       tags:
       - discount
-      - customer
-      - subscription
       security:
         - Bearer: []
       parameters:
@@ -579,7 +577,7 @@ paths:
         in: body
         schema:
           type: string
-          description: Discount code (string).
+          description: Discount code (string), without curly {}.
         required: true
       responses:
         200:
@@ -651,8 +649,6 @@ paths:
       operationId: PostPaymentMethod
       tags:
       - paymentmethod
-      - subscription
-      - customer
       security:
         - Bearer: []
       parameters:
@@ -734,6 +730,34 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Subscription'
+  /subscriptions/{id}/setamount/:
+    put:
+      summary: /subscriptions/:id/setamount/
+      description: Sets quantity on all subscription charges or the one with specific productplanchargeid.
+      tags:
+      - subscription
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription. Guid or UUID.
+        required: true
+        type: string
+      - name: setamountbody
+        in: body
+        description: Sets quantity on all subscription charges or the one with specific productplanchargeid
+        schema:
+          $ref: '#/definitions/SubscriptionSetAmountRequest'
+      responses:
+        204:
+          description: No content.
+        400:
+          description: Bad request.
+        404:
+          description: Not found.
+        500:
+          description: General service error.
   /subscriptions/{id}/activate/:
     put:
       summary: /subscriptions/:id/activate
@@ -924,6 +948,29 @@ paths:
         description: ID of subscription charge. Guid or UUID.
         required: true
         type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SubscriptionCharge'
+    put:
+      summary: /subscriptioncharges/:id
+      description: Update the most current subscription charge of id.
+      operationId: UpdateSubscriptionCharge
+      tags:
+      - subscriptioncharge
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of subscription charge. Guid or UUID.
+        required: true
+        type: string
+      - name: updatecharge
+        in: body
+        schema:
+          $ref: '#/definitions/SubscriptionChargeUpdateRequest'
       responses:
         200:
           description: OK
@@ -2361,6 +2408,33 @@ definitions:
       id:
         type: string
         description: guid
+  SubscriptionChargeUpdateRequest:
+    type: object
+    properties:
+      nextchargedate:
+        type: string
+        description: Optimal. Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null. If provided, next charge date will be set.
+      quantity:
+        type: number
+        description: Optimal. New amount of charge. Allows null. If provided, the amount will be overwritten.
+      description:
+        type: string
+        description: Optimal. Description of the charge.
+      customprice:
+        type: number
+        description: Optimal. Decimal of custom pricing. If provided, custom pricing is applied. Set customprice to 0 to reset.
+SubscriptionSetAmountRequest:
+    type: object
+    properties:
+      quantity:
+        type: number
+        description: Decimal of the new amount.
+      productplanchargeid:
+        type: string
+        description: Guid or UUID. Spefiic id of productplancharge..
+      all:
+        type: boolean
+        description: If specified true, will ignore productplanchargeid, and set quantity across all charges.
   SubscriptionCharge:
     type: object
     properties:
