@@ -136,8 +136,8 @@ paths:
       summary: /customers/:id/paymentmethods
       description: Return a list of payment method ids. Requires API scope 'read'.
       tags:
-      - customer
       - paymentmethod
+      - customer
       parameters:
       - name: id
         in: path
@@ -161,7 +161,6 @@ paths:
       description: Return a list of invoice ids as a string array. Requires API scope 'read'.
       tags:
       - customer
-      - invoice
       parameters:
       - name: id
         in: path
@@ -228,8 +227,8 @@ paths:
       description: Validates an associated payment method of a customer.
       operationId: ValidatePaymentMethod
       tags:
-      - customer
       - paymentmethod
+      - customer
       security:
         - Bearer: []
       parameters:
@@ -249,8 +248,8 @@ paths:
       description: Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.
       operationId: AssignCardToken
       tags:
+      - paymentmethod
       - customer
-      - creditcard
       security:
         - Bearer: []
       parameters:
@@ -273,9 +272,8 @@ paths:
       description: Assigns a default payment method. Requires API scope 'write'.
       operationId: SetDefaultPaymentMethod
       tags:
-      - customer
-      - creditcard
       - paymentmethod
+      - customer
       security:
         - Bearer: []
       parameters:
@@ -577,7 +575,7 @@ paths:
         in: body
         schema:
           type: string
-          description: Discount code (string), without curly {}.
+          description: Discount code (string).
         required: true
       responses:
         200:
