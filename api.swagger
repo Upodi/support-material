@@ -311,6 +311,42 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Discount'
+    put:
+      summary: /discounts/
+      description: Updates a discount. Requires API scope 'write'.
+      operationId: Putdiscounts
+      tags:
+        - discount
+      security:
+        - Bearer: []
+      parameters:
+        - name: discount
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DiscountCreate'
+      responses:
+        200:
+          description: Updated.
+        404:
+          description: Not found.
+    post:
+      summary: /discounts/
+      description: Creates a discount. Requires API scope 'write'. The type has to be 0, as for now we don’t have other discount type but 0 is meant as default percentage type discount.
+      operationId: CreateDiscounts
+      tags:
+      - discount
+      security:
+        - Bearer: []
+      parameters:
+        - name: discount
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DiscountCreate'
+      responses:
+        200:
+          description: OK
   /discounts/{id}:
     get:
       summary: /discounts/:id
@@ -329,6 +365,26 @@ paths:
       responses:
         200:
           description: Discount object.
+        404:
+          description: Not found.
+    delete:
+      summary: /discounts/:id
+      description: Deletes discount using its id.
+      tags:
+      - discount
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of discount.  Guid or UUID.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Discount deleted.
+        201:
+          description: Discount deleted.
         404:
           description: Not found.
   /discounts/{id}/applydiscountcodecustomer:
@@ -460,6 +516,52 @@ paths:
           description: Discount removed.
         404:
           description: Not found.
+  /discounts/{id}/generatediscountcodes:
+    put:
+      summary: /discounts/:id/generatediscountcodes
+      description: Generates a list of discount codes.
+      operationId: GenerateDiscountCodes
+      tags:
+        - discount
+        - discountcode
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: Id of discount to create codes under.
+        required: true
+        type: integer
+      - name: discountCode
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GenerateDiscountCode'
+      responses:
+        200:
+          description: OK
+  /discounts/{id}/discountcodes:
+    get:
+      summary: /discounts/:id/discountcodes/
+      description: Retrieves a list of discount codes of a discount.
+      operationId: ListDiscountCodes
+      tags:
+        - discount
+      security:
+        - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: ID of discount.
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DiscountCode'
   /discounts/discountcode:
     delete:
       summary: /discounts/discountcode/
@@ -472,11 +574,13 @@ paths:
       security:
         - Bearer: []
       parameters:
-      - name: discountCode
+      - name: discountcode
+        description: Discount code (string).
         in: body
-        description: Discount code (full), ex. test-LwRkAOac
+        schema:
+          type: string
+          description: Discount code (string).
         required: true
-        type: string
       responses:
         200:
           description: Discount code removed.
@@ -1412,6 +1516,31 @@ definitions:
       modifieddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  DiscountCode:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Guid or UUID.
+      codeprefix:
+        type: string
+      code:
+        type: string
+      state:
+        type: integer
+        description: default 0.
+      usecount:
+        type: integer
+        description: Number of times the code has been used.
+      discountid:
+        type: string
+        description: Guid or UUID.
+      redemption:
+        type: integer
+        description: Number of times the code can be used.
+      completecode:
+        type: string
+        description: Full usable code of the discount code {prefix-code}
   CreatePaymentMethod:
     type: object
     properties:
@@ -2194,6 +2323,38 @@ definitions:
       modifieddate:
         type: string
         description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z.
+  GenerateDiscountCode:
+    type: object
+    properties:
+      prefix:
+        type: string
+        description: Prefix of the discount code.
+      amount:
+        type: number
+        description: Number of codes to create. Must be larger than 0.
+      redemption:
+        type: integer
+      expirydate:
+        type: string
+        description: Date and time in RFC 3339 format. YYYY-MM-DDT23:59:60Z. Allows null.
+  DiscountCreate:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Guid or UUID. Required for update. Not valid for create.
+      fullname:
+        type: string
+        description: Name of discount
+      type:
+        type: integer
+        description: Type of discount. The type has to be 0
+      amount:
+        type: number
+        description: Decimal of procentage, example 0.43 = 43%.
+      invoicetext:
+        type: string
+        description: Text for invoice text.
   CreatedResponse:
     type: object
     properties:
