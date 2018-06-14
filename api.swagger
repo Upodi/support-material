@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.5.1
+  version: 2.5.0
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -136,8 +136,8 @@ paths:
       summary: /customers/:id/paymentmethods
       description: Return a list of payment method ids. Requires API scope 'read'.
       tags:
-      - paymentmethod
       - customer
+      - paymentmethod
       parameters:
       - name: id
         in: path
@@ -161,6 +161,7 @@ paths:
       description: Return a list of invoice ids as a string array. Requires API scope 'read'.
       tags:
       - customer
+      - invoice
       parameters:
       - name: id
         in: path
@@ -227,8 +228,8 @@ paths:
       description: Validates an associated payment method of a customer.
       operationId: ValidatePaymentMethod
       tags:
-      - paymentmethod
       - customer
+      - paymentmethod
       security:
         - Bearer: []
       parameters:
@@ -248,8 +249,8 @@ paths:
       description: Assigns a card to a customer and maps it as a payment method. Requires API scope 'write'.
       operationId: AssignCardToken
       tags:
-      - paymentmethod
       - customer
+      - creditcard
       security:
         - Bearer: []
       parameters:
@@ -272,8 +273,9 @@ paths:
       description: Assigns a default payment method. Requires API scope 'write'.
       operationId: SetDefaultPaymentMethod
       tags:
-      - paymentmethod
       - customer
+      - creditcard
+      - paymentmethod
       security:
         - Bearer: []
       parameters:
@@ -575,7 +577,7 @@ paths:
         in: body
         schema:
           type: string
-          description: Discount code (string).
+          description: Discount code (string), without curly {}.
         required: true
       responses:
         200:
