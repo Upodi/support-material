@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.5.1
+  version: 2.5.2
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -94,6 +94,7 @@ paths:
     get:
       summary: /customers/:id
       description: Return a single customer. Requires API scope 'read'.
+      operationId: GetCustomer
       tags:
       - customer
       parameters:
@@ -118,6 +119,7 @@ paths:
     delete:
       summary: /customers/:id
       description: Delete a single customer. Requires API scope 'write'.
+      operationId: DeleteCustomer
       tags:
       - customer
       parameters:
@@ -135,6 +137,7 @@ paths:
     get:
       summary: /customers/:id/paymentmethods
       description: Return a list of payment method ids. Requires API scope 'read'.
+      operationId: GetPaymentMethodsByCustomerId
       tags:
       - paymentmethod
       - customer
@@ -159,6 +162,7 @@ paths:
     get:
       summary: /customers/:id/invoices
       description: Return a list of invoice ids as a string array. Requires API scope 'read'.
+      operationId: GetInvoicesByCustomerId
       tags:
       - customer
       parameters:
@@ -368,6 +372,7 @@ paths:
     delete:
       summary: /discounts/:id
       description: Deletes discount using its id.
+      operationId: DeleteDiscount
       tags:
       - discount
       security:
@@ -594,6 +599,7 @@ paths:
     get:
       summary: /paymentmethods/
       description: Returns a list of payment method. Requires API scope 'read'.
+      operationId: GetPaymentMethods
       tags:
       - paymentmethod
       security:
@@ -607,6 +613,7 @@ paths:
     get:
       summary: /paymentmethods/:id
       description: Returns a payment method by id. Requires API scope 'read'.
+      operationId: GetPaymentMethod
       tags:
       - paymentmethod
       security:
@@ -626,6 +633,7 @@ paths:
     get:
       summary: /paymentmethods/:customerid/bycustomer
       description: Returns a paymenthod by customer id. Requires API scope 'read'.
+      operationId: GetPaymentMethodByCustomer
       tags:
       - paymentmethod
       security:
@@ -675,7 +683,7 @@ paths:
     get:
       summary: /subscriptions/
       description: Returns a list of subscriptions. Requires API scope 'read'.
-      operationId: GetSubscription
+      operationId: GetSubscriptions
       tags:
       - subscription
       security:
@@ -714,6 +722,7 @@ paths:
     get:
       summary: /subscriptions/:id
       description: Get a subscription based on the id. Requires API scope 'read'.
+      operationId: GetSubscription
       tags:
       - subscription
       security:
@@ -733,6 +742,7 @@ paths:
     put:
       summary: /subscriptions/:id/setamount/
       description: Sets quantity on all subscription charges or the one with specific productplanchargeid.
+      operationId: UpdateSubscription
       tags:
       - subscription
       security:
@@ -761,6 +771,7 @@ paths:
     put:
       summary: /subscriptions/:id/activate
       description: Activate a newly created subscription.
+      operationId: ActivateSubscription
       tags:
       - subscription
       security:
@@ -784,6 +795,7 @@ paths:
     put:
       summary: /subscriptions/:id/switchplan
       description: Switch a subscription plan from one to another.
+      operationId: SwitchPlan
       tags:
       - subscription
       security:
@@ -816,6 +828,7 @@ paths:
         Cancels an active subscription. 
         #### API Token scope
         * WRITE.
+      operationId: CancelSubscription
       tags:
       - subscription
       security:
@@ -842,6 +855,7 @@ paths:
         Resume a hold subscription. 
         #### API Token scope
         * WRITE.
+      operationId: ResumeSubscription
       tags:
       - subscription
       security:
@@ -868,6 +882,7 @@ paths:
         Holds an active subscription. 
         #### API Token scope
         * WRITE.
+      operationId: HoldSubscription
       tags:
       - subscription
       security:
@@ -894,6 +909,7 @@ paths:
         Expire an active subscription. 
         #### API Token scope
         * WRITE.
+      operationId: ExpireSubscription
       tags:
       - subscription
       security:
@@ -1256,6 +1272,7 @@ paths:
     get:
       summary: /productplans/:id
       description: Get a product plan based on the id. Requires API scope 'read'.
+      operationId: GetProductPlan
       tags:
       - productplan
       security:
