@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.5.2
+  version: 2.5.4
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -2032,10 +2032,17 @@ definitions:
         type: string
       activecurrencies:
         type: string
+      emailtemplatesetid:
+        type: string
+        description: Guid or UUID.
       currencies:
         type: array
+        description: List of currenties supported by the product plan.
         items:
           type: string
+      changehandle:
+        type: integer
+        description: Provides a value indicating how change handling is done. 0 = none, 1 = prorate upgrades.
       description:
         type: string
       status:
@@ -2079,6 +2086,9 @@ definitions:
       productplanid:
         type: string
         description: Guid or UUID.
+      addonproductchargeid:
+        type: string
+        description: Guid or UUID.      
       fullname:
         type: string
       invoicetext:
