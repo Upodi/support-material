@@ -1,7 +1,7 @@
 # define
 swagger: '2.0'
 info:
-  version: 2.5.4
+  version: 2.5.5
   title: Upodi API
   description: This documentation is for v4.0 of Upodi API. The URLs listed in this documentation are relative to https://api.upodi.io/v2.
 host: api.upodi.io
@@ -1514,26 +1514,32 @@ definitions:
         description: payment terms
       subscriptions:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/Subscription'
       invoices:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/Invoice'
       paymentmethods:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/PaymentMethod'
       subscriptioncharges:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/SubscriptionCharge'
       transactions:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/Transaction'
       activities:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/Activity'
       createdby:
@@ -2049,16 +2055,19 @@ definitions:
         type: integer
       productplancharges:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/ProductPlanCharge'
       subscriptions:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/Subscription'
       productfamily:
         type: object
       productplanpricings:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/ProductPlanChargePricing'
       createdby:
@@ -2115,10 +2124,12 @@ definitions:
         type: object
       productplanchargepricings:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/ProductPlanChargePricing'
       subscriptioncharges:
         type: array
+        description: Read-only.
         items:
           $ref: '#/definitions/SubscriptionCharge'
       uom:
@@ -2239,10 +2250,12 @@ definitions:
         type: object
       subscriptioncharges:
         type: array
+        description: Read-only. Not subject to POST. During POST, the subscription will inherit charges from the product plan.
         items:
           $ref: '#/definitions/SubscriptionCharge'
       activities:
         type: array
+        description: Read-only. List of activities applied.
         items:
           $ref: '#/definitions/Activity'
       createdby:
