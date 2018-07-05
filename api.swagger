@@ -809,7 +809,6 @@ paths:
       - name: toplan
         in: body
         description: The new id of the product plan to switch to.
-        required: true
         schema:
           type: string
         required: true
