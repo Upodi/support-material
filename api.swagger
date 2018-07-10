@@ -347,8 +347,10 @@ paths:
           schema:
             $ref: '#/definitions/DiscountCreate'
       responses:
-        200:
-          description: OK
+        201:
+          description: Created. Body contains the id of the newly created object.
+          schema:
+            $ref: '#/definitions/CreatedResponse'
   /discounts/{id}:
     get:
       summary: /discounts/:id
@@ -1291,8 +1293,8 @@ paths:
   /productplans/{id}/duplicate:
     post:
       summary: /productplans/:id/duplicate
-      description: Dublicate a product plan. Requires API scope 'write'.
-      operationId: DublicateProductPlan
+      description: Duplicate a product plan. Requires API scope 'write'.
+      operationId: DuplicateProductPlan
       tags:
       - productplan
       security:
