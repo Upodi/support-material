@@ -2,340 +2,344 @@
    "default":"WW",
    "vatzones":[
       {
-         "austria":"belgium",
-         "EU":"EU"
+         "CountryName":"austria",
+         "VatZone":"EU"
       },
       {
-         "austria":"bulgaria",
-         "EU":"EU"
+         "CountryName":"belgium",
+         "VatZone":"EU"
       },
       {
-         "austria":"croatia",
-         "EU":"EU"
+         "CountryName":"bulgaria",
+         "VatZone":"EU"
       },
       {
-         "austria":"republic of cyprus",
-         "EU":"EU"
+         "CountryName":"croatia",
+         "VatZone":"EU"
       },
       {
-         "austria":"czech republic",
-         "EU":"EU"
+         "CountryName":"republic of cyprus",
+         "VatZone":"EU"
       },
       {
-         "austria":"denmark",
-         "EU":"Indland"
+         "CountryName":"czech republic",
+         "VatZone":"EU"
       },
       {
-         "austria":"danmark",
-         "EU":"Indland"
+         "CountryName":"denmark",
+         "VatZone":"Indland"
       },
       {
-         "austria":"dk",
-         "EU":"Indland"
+         "CountryName":"danmark",
+         "VatZone":"Indland"
       },
       {
-         "austria":"estonia",
-         "EU":"EU"
+         "CountryName":"dk",
+         "VatZone":"Indland"
       },
       {
-         "austria":"finland",
-         "EU":"EU"
+         "CountryName":"estonia",
+         "VatZone":"EU"
       },
       {
-         "austria":"france",
-         "EU":"EU"
+         "CountryName":"finland",
+         "VatZone":"EU"
       },
       {
-         "austria":"germany",
-         "EU":"EU"
+         "CountryName":"france",
+         "VatZone":"EU"
       },
       {
-         "austria":"greece",
-         "EU":"EU"
+         "CountryName":"germany",
+         "VatZone":"EU"
       },
       {
-         "austria":"hungary",
-         "EU":"EU"
+         "CountryName":"greece",
+         "VatZone":"EU"
       },
       {
-         "austria":"ireland",
-         "EU":"EU"
+         "CountryName":"hungary",
+         "VatZone":"EU"
       },
       {
-         "austria":"italy",
-         "EU":"EU"
+         "CountryName":"ireland",
+         "VatZone":"EU"
       },
       {
-         "austria":"latvia",
-         "EU":"EU"
+         "CountryName":"italy",
+         "VatZone":"EU"
       },
       {
-         "austria":"lithuania",
-         "EU":"EU"
+         "CountryName":"latvia",
+         "VatZone":"EU"
       },
       {
-         "austria":"luxembourg",
-         "EU":"EU"
+         "CountryName":"lithuania",
+         "VatZone":"EU"
       },
       {
-         "austria":"malta",
-         "EU":"EU"
+         "CountryName":"luxembourg",
+         "VatZone":"EU"
       },
       {
-         "austria":"netherlands",
-         "EU":"EU"
+         "CountryName":"malta",
+         "VatZone":"EU"
       },
       {
-         "austria":"poland",
-         "EU":"EU"
+         "CountryName":"netherlands",
+         "VatZone":"EU"
       },
       {
-         "austria":"portugal",
-         "EU":"EU"
+         "CountryName":"poland",
+         "VatZone":"EU"
       },
       {
-         "austria":"romania",
-         "EU":"EU"
+         "CountryName":"portugal",
+         "VatZone":"EU"
       },
       {
-         "austria":"slovakia",
-         "EU":"EU"
+         "CountryName":"romania",
+         "VatZone":"EU"
       },
       {
-         "austria":"slovenia",
-         "EU":"EU"
+         "CountryName":"slovakia",
+         "VatZone":"EU"
       },
       {
-         "austria":"spain",
-         "EU":"EU"
+         "CountryName":"slovenia",
+         "VatZone":"EU"
       },
       {
-         "austria":"sweden ",
-         "EU":"EU"
+         "CountryName":"spain",
+         "VatZone":"EU"
       },
       {
-         "austria":"uk",
-         "EU":"EU"
+         "CountryName":"sweden",
+         "VatZone":"EU"
       },
       {
-         "austria":"united kingdom",
-         "EU":"EU"
+         "CountryName":"uk",
+         "VatZone":"EU"
       },
       {
-         "austria":"great britain",
-         "EU":"EU"
+         "CountryName":"united kingdom",
+         "VatZone":"EU"
       },
       {
-         "austria":"england",
-         "EU":"EU"
+         "CountryName":"great britain",
+         "VatZone":"EU"
       },
       {
-         "austria":"belgien",
-         "EU":"EU"
+         "CountryName":"england",
+         "VatZone":"EU"
       },
       {
-         "austria":"bulgarien",
-         "EU":"EU"
+         "CountryName":"belgien",
+         "VatZone":"EU"
       },
       {
-         "austria":"cypern",
-         "EU":"EU"
+         "CountryName":"bulgarien",
+         "VatZone":"EU"
       },
       {
-         "austria":"nederlandene",
-         "EU":"EU"
+         "CountryName":"cypern",
+         "VatZone":"EU"
       },
       {
-         "austria":"polen",
-         "EU":"EU"
+         "CountryName":"nederlandene",
+         "VatZone":"EU"
       },
       {
-         "austria":"estland",
-         "EU":"EU"
+         "CountryName":"polen",
+         "VatZone":"EU"
       },
       {
-         "austria":"rumænien",
-         "EU":"EU"
+         "CountryName":"estland",
+         "VatZone":"EU"
       },
       {
-         "austria":"det forenede kongerige",
-         "EU":"EU"
+         "CountryName":"rumænien",
+         "VatZone":"EU"
       },
       {
-         "austria":"slovakiet",
-         "EU":"EU"
+         "CountryName":"det forenede kongerige",
+         "VatZone":"EU"
       },
       {
-         "austria":"frankrig",
-         "EU":"EU"
+         "CountryName":"slovakiet",
+         "VatZone":"EU"
       },
       {
-         "austria":"slovenien",
-         "EU":"EU"
+         "CountryName":"frankrig",
+         "VatZone":"EU"
       },
       {
-         "austria":"grækenland",
-         "EU":"EU"
+         "CountryName":"slovenien",
+         "VatZone":"EU"
       },
       {
-         "austria":"spanien",
-         "EU":"EU"
+         "CountryName":"grækenland",
+         "VatZone":"EU"
       },
       {
-         "austria":"irland",
-         "EU":"EU"
+         "CountryName":"spanien",
+         "VatZone":"EU"
       },
       {
-         "austria":"sverige",
-         "EU":"EU"
+         "CountryName":"irland",
+         "VatZone":"EU"
       },
       {
-         "austria":"italien",
-         "EU":"EU"
+         "CountryName":"sverige",
+         "VatZone":"EU"
       },
       {
-         "austria":"tjekkiet",
-         "EU":"EU"
+         "CountryName":"italien",
+         "VatZone":"EU"
       },
       {
-         "austria":"kroatien",
-         "EU":"EU"
+         "CountryName":"tjekkiet",
+         "VatZone":"EU"
       },
       {
-         "austria":"tyskland",
-         "EU":"EU"
+         "CountryName":"kroatien",
+         "VatZone":"EU"
       },
       {
-         "austria":"letland",
-         "EU":"EU"
+         "CountryName":"tyskland",
+         "VatZone":"EU"
       },
       {
-         "austria":"ungarn",
-         "EU":"EU"
+         "CountryName":"letland",
+         "VatZone":"EU"
       },
       {
-         "austria":"litauen",
-         "EU":"EU"
+         "CountryName":"ungarn",
+         "VatZone":"EU"
       },
       {
-         "austria":"østrig",
-         "EU":"EU"
+         "CountryName":"litauen",
+         "VatZone":"EU"
       },
       {
-         "austria":"storbritannien",
-         "EU":"EU"
+         "CountryName":"østrig",
+         "VatZone":"EU"
       },
       {
-         "austria":"at",
-         "EU":"EU"
+         "CountryName":"storbritannien",
+         "VatZone":"EU"
       },
       {
-         "austria":"be",
-         "EU":"EU"
+         "CountryName":"at",
+         "VatZone":"EU"
       },
       {
-         "austria":"bg",
-         "EU":"EU"
+         "CountryName":"be",
+         "VatZone":"EU"
       },
       {
-         "austria":"hr",
-         "EU":"EU"
+         "CountryName":"bg",
+         "VatZone":"EU"
       },
       {
-         "austria":"cy",
-         "EU":"EU"
+         "CountryName":"hr",
+         "VatZone":"EU"
       },
       {
-         "austria":"cz",
-         "EU":"EU"
+         "CountryName":"cy",
+         "VatZone":"EU"
       },
       {
-         "austria":"ee",
-         "EU":"EU"
+         "CountryName":"cz",
+         "VatZone":"EU"
       },
       {
-         "austria":"fi",
-         "EU":"EU"
+         "CountryName":"ee",
+         "VatZone":"EU"
       },
       {
-         "austria":"fr",
-         "EU":"EU"
+         "CountryName":"fi",
+         "VatZone":"EU"
       },
       {
-         "austria":"de",
-         "EU":"EU"
+         "CountryName":"fr",
+         "VatZone":"EU"
       },
       {
-         "austria":"el",
-         "EU":"EU"
+         "CountryName":"de",
+         "VatZone":"EU"
       },
       {
-         "austria":"hu",
-         "EU":"EU"
+         "CountryName":"el",
+         "VatZone":"EU"
       },
       {
-         "austria":"ie",
-         "EU":"EU"
+         "CountryName":"hu",
+         "VatZone":"EU"
       },
       {
-         "austria":"it",
-         "EU":"EU"
+         "CountryName":"ie",
+         "VatZone":"EU"
       },
       {
-         "austria":"lv",
-         "EU":"EU"
+         "CountryName":"it",
+         "VatZone":"EU"
       },
       {
-         "austria":"lt",
-         "EU":"EU"
+         "CountryName":"lv",
+         "VatZone":"EU"
       },
       {
-         "austria":"lu",
-         "EU":"EU"
+         "CountryName":"lt",
+         "VatZone":"EU"
       },
       {
-         "austria":"mt",
-         "EU":"EU"
+         "CountryName":"lu",
+         "VatZone":"EU"
       },
       {
-         "austria":"nl",
-         "EU":"EU"
+         "CountryName":"mt",
+         "VatZone":"EU"
       },
       {
-         "austria":"pl",
-         "EU":"EU"
+         "CountryName":"nl",
+         "VatZone":"EU"
       },
       {
-         "austria":"pt",
-         "EU":"EU"
+         "CountryName":"pl",
+         "VatZone":"EU"
       },
       {
-         "austria":"po",
-         "EU":"EU"
+         "CountryName":"pt",
+         "VatZone":"EU"
       },
       {
-         "austria":"ro",
-         "EU":"EU"
+         "CountryName":"po",
+         "VatZone":"EU"
       },
       {
-         "austria":"sk",
-         "EU":"EU"
+         "CountryName":"ro",
+         "VatZone":"EU"
       },
       {
-         "austria":"si",
-         "EU":"EU"
+         "CountryName":"sk",
+         "VatZone":"EU"
       },
       {
-         "austria":"es",
-         "EU":"EU"
+         "CountryName":"si",
+         "VatZone":"EU"
       },
       {
-         "austria":"se",
-         "EU":"EU"
+         "CountryName":"es",
+         "VatZone":"EU"
       },
       {
-         "austria":"gb",
-         "EU":"EU"
+         "CountryName":"se",
+         "VatZone":"EU"
+      },
+      {
+         "CountryName":"gb",
+         "VatZone":"EU"
       }
    ]
 }
