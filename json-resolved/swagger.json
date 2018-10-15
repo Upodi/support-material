@@ -1,0 +1,629 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "defaultDescription",
+    "version" : "0.1",
+    "title" : "defaultTitle"
+  },
+  "paths" : {
+    "/v3/subscriptions" : {
+      "get" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "Generated header parameter. Example value ='application/json'",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "application/json"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/Subscription"
+            }
+          }
+        },
+        "security" : [ {
+          "Secured" : [ ]
+        } ]
+      }
+    },
+    "/v3/time" : {
+      "get" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "Generated header parameter. Example value ='application/json'",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "application/json"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/Model6"
+            }
+          }
+        },
+        "security" : [ {
+          "Secured" : [ ]
+        } ]
+      }
+    },
+    "/v3/customers" : {
+      "get" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "Generated header parameter. Example value ='application/json'",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "application/json"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/Customers"
+            }
+          }
+        },
+        "security" : [ {
+          "Secured" : [ ]
+        } ]
+      }
+    },
+    "/v3/uoms" : {
+      "get" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "Generated header parameter. Example value ='application/json'",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "application/json"
+        }, {
+          "name" : "param0",
+          "in" : "path",
+          "description" : "Example values form path are: 'uoms' and 'paymentmethods'",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/Model0"
+            }
+          },
+          "404" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "Secured" : [ ]
+        } ]
+      }
+    },
+    "/v3/productplans" : {
+      "get" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "Generated header parameter. Example value ='application/json'",
+          "required" : false,
+          "type" : "string",
+          "x-example" : "application/json"
+        }, {
+          "name" : "param2",
+          "in" : "path",
+          "description" : "Example values form path are: 'productplans' and 'param1'",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Definition generated from Swagger Inspector"
+          },
+          "404" : {
+            "description" : "Definition generated from Swagger Inspector",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "security" : [ {
+          "Secured" : [ ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "Secured" : {
+      "type" : "oauth2",
+      "authorizationUrl" : "https://example.com",
+      "flow" : "implicit",
+      "scopes" : { }
+    }
+  },
+  "definitions" : {
+    "Items" : {
+      "properties" : {
+        "FullName" : {
+          "type" : "string"
+        },
+        "PluralName" : {
+          "type" : "string"
+        },
+        "Status" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "ID" : {
+          "type" : "string"
+        },
+        "CreatedDate" : {
+          "type" : "string"
+        },
+        "ModifiedDate" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "PluralName" : "PluralName",
+        "Status" : 0,
+        "FullName" : "FullName",
+        "CreatedDate" : "CreatedDate",
+        "ID" : "ID",
+        "ModifiedDate" : "ModifiedDate"
+      }
+    },
+    "Model0" : {
+      "properties" : {
+        "Items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Items"
+          }
+        },
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        }
+      },
+      "example" : {
+        "Items" : [ {
+          "PluralName" : "PluralName",
+          "Status" : 0,
+          "FullName" : "FullName",
+          "CreatedDate" : "CreatedDate",
+          "ID" : "ID",
+          "ModifiedDate" : "ModifiedDate"
+        }, {
+          "PluralName" : "PluralName",
+          "Status" : 0,
+          "FullName" : "FullName",
+          "CreatedDate" : "CreatedDate",
+          "ID" : "ID",
+          "ModifiedDate" : "ModifiedDate"
+        } ],
+        "paging" : {
+          "PageSize" : 2,
+          "PageNumber" : 4,
+          "TotalPages" : 3,
+          "TotalItems" : 9
+        }
+      }
+    },
+    "ErrorResponse" : {
+      "properties" : {
+        "Type" : {
+          "type" : "string"
+        },
+        "Message" : {
+          "type" : "string"
+        },
+        "Errorcode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "Httpstatuscode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "Helplink" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SubscriptionArray" : {
+      "properties" : {
+        "Activities" : {
+          "type" : "array"
+        },
+        "SubscriptionCharges" : {
+          "type" : "array"
+        },
+        "CustomerID" : {
+          "type" : "string"
+        },
+        "ProductPlanID" : {
+          "type" : "string"
+        },
+        "SubscriptionNumber" : {
+          "type" : "string"
+        },
+        "AutoRenew" : {
+          "type" : "boolean"
+        },
+        "StateCode" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "Status" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "StartDate" : {
+          "type" : "string"
+        },
+        "EndDate" : {
+          "type" : "string"
+        },
+        "LifeTime" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "IsEvergreen" : {
+          "type" : "boolean"
+        },
+        "InitialTermInterval" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "InitialTermPeriod" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "InitialTerm" : {
+          "type" : "string"
+        },
+        "RenewalTermInterval" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "RenewalTermPeriod" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "RenewalTerm" : {
+          "type" : "string"
+        },
+        "ActivationDate" : {
+          "type" : "string"
+        },
+        "CreatedBy" : {
+          "type" : "string"
+        },
+        "ModifiedBy" : {
+          "type" : "string"
+        },
+        "ID" : {
+          "type" : "string"
+        },
+        "CreatedDate" : {
+          "type" : "string"
+        },
+        "ModifiedDate" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "Activities" : "",
+        "Status" : 6,
+        "SubscriptionNumber" : "SubscriptionNumber",
+        "InitialTermPeriod" : 5,
+        "CreatedBy" : "CreatedBy",
+        "LifeTime" : 1,
+        "AutoRenew" : true,
+        "StateCode" : 0,
+        "CustomerID" : "CustomerID",
+        "ProductPlanID" : "ProductPlanID",
+        "IsEvergreen" : true,
+        "ModifiedBy" : "ModifiedBy",
+        "ModifiedDate" : "ModifiedDate",
+        "EndDate" : "EndDate",
+        "StartDate" : "StartDate",
+        "CreatedDate" : "CreatedDate",
+        "RenewalTermInterval" : 2,
+        "InitialTermInterval" : 5,
+        "RenewalTermPeriod" : 7,
+        "RenewalTerm" : "RenewalTerm",
+        "ActivationDate" : "ActivationDate",
+        "ID" : "ID",
+        "SubscriptionCharges" : "",
+        "InitialTerm" : "InitialTerm"
+      }
+    },
+    "Subscription" : {
+      "properties" : {
+        "Items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SubscriptionArray"
+          }
+        },
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        }
+      },
+      "example" : {
+        "Items" : [ {
+          "Activities" : "",
+          "Status" : 6,
+          "SubscriptionNumber" : "SubscriptionNumber",
+          "InitialTermPeriod" : 5,
+          "CreatedBy" : "CreatedBy",
+          "LifeTime" : 1,
+          "AutoRenew" : true,
+          "StateCode" : 0,
+          "CustomerID" : "CustomerID",
+          "ProductPlanID" : "ProductPlanID",
+          "IsEvergreen" : true,
+          "ModifiedBy" : "ModifiedBy",
+          "ModifiedDate" : "ModifiedDate",
+          "EndDate" : "EndDate",
+          "StartDate" : "StartDate",
+          "CreatedDate" : "CreatedDate",
+          "RenewalTermInterval" : 2,
+          "InitialTermInterval" : 5,
+          "RenewalTermPeriod" : 7,
+          "RenewalTerm" : "RenewalTerm",
+          "ActivationDate" : "ActivationDate",
+          "ID" : "ID",
+          "SubscriptionCharges" : "",
+          "InitialTerm" : "InitialTerm"
+        }, {
+          "Activities" : "",
+          "Status" : 6,
+          "SubscriptionNumber" : "SubscriptionNumber",
+          "InitialTermPeriod" : 5,
+          "CreatedBy" : "CreatedBy",
+          "LifeTime" : 1,
+          "AutoRenew" : true,
+          "StateCode" : 0,
+          "CustomerID" : "CustomerID",
+          "ProductPlanID" : "ProductPlanID",
+          "IsEvergreen" : true,
+          "ModifiedBy" : "ModifiedBy",
+          "ModifiedDate" : "ModifiedDate",
+          "EndDate" : "EndDate",
+          "StartDate" : "StartDate",
+          "CreatedDate" : "CreatedDate",
+          "RenewalTermInterval" : 2,
+          "InitialTermInterval" : 5,
+          "RenewalTermPeriod" : 7,
+          "RenewalTerm" : "RenewalTerm",
+          "ActivationDate" : "ActivationDate",
+          "ID" : "ID",
+          "SubscriptionCharges" : "",
+          "InitialTerm" : "InitialTerm"
+        } ],
+        "paging" : {
+          "PageSize" : 2,
+          "PageNumber" : 4,
+          "TotalPages" : 3,
+          "TotalItems" : 9
+        }
+      }
+    },
+    "Time" : {
+      "properties" : {
+        "Time" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CustomerArray" : {
+      "properties" : {
+        "Activities" : {
+          "type" : "array"
+        },
+        "Contacts" : {
+          "type" : "array"
+        },
+        "Invoices" : {
+          "type" : "array"
+        },
+        "SubscriptionCharges" : {
+          "type" : "array"
+        },
+        "Subscriptions" : {
+          "type" : "array"
+        },
+        "Transactions" : {
+          "type" : "array"
+        },
+        "AccountNumber" : {
+          "type" : "string"
+        },
+        "CompanyName" : {
+          "type" : "string"
+        },
+        "FullName" : {
+          "type" : "string"
+        },
+        "PrimaryEmail" : {
+          "type" : "string"
+        },
+        "CurrencyCode" : {
+          "type" : "string"
+        },
+        "AutoBill" : {
+          "type" : "boolean"
+        },
+        "BillToParent" : {
+          "type" : "boolean"
+        },
+        "PaymentTerm" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "CollectiveBilling" : {
+          "type" : "boolean"
+        },
+        "CreatedBy" : {
+          "type" : "string"
+        },
+        "ModifiedBy" : {
+          "type" : "string"
+        },
+        "ID" : {
+          "type" : "string"
+        },
+        "CreatedDate" : {
+          "type" : "string"
+        },
+        "ModifiedDate" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "Activities" : "",
+        "CreatedBy" : "CreatedBy",
+        "CollectiveBilling" : true,
+        "Subscriptions" : "",
+        "AutoBill" : true,
+        "Invoices" : "",
+        "PrimaryEmail" : "PrimaryEmail",
+        "PaymentTerm" : 0,
+        "ModifiedBy" : "ModifiedBy",
+        "ModifiedDate" : "ModifiedDate",
+        "AccountNumber" : "AccountNumber",
+        "CurrencyCode" : "CurrencyCode",
+        "Transactions" : "",
+        "CompanyName" : "CompanyName",
+        "Contacts" : "",
+        "BillToParent" : true,
+        "FullName" : "FullName",
+        "CreatedDate" : "CreatedDate",
+        "ID" : "ID",
+        "SubscriptionCharges" : ""
+      }
+    },
+    "Paging" : {
+      "properties" : {
+        "TotalItems" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "TotalPages" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "PageSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "PageNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      },
+      "example" : {
+        "PageSize" : 2,
+        "PageNumber" : 4,
+        "TotalPages" : 3,
+        "TotalItems" : 9
+      }
+    },
+    "Customers" : {
+      "properties" : {
+        "Items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CustomerArray"
+          }
+        },
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        }
+      },
+      "example" : {
+        "Items" : [ {
+          "Activities" : "",
+          "CreatedBy" : "CreatedBy",
+          "CollectiveBilling" : true,
+          "Subscriptions" : "",
+          "AutoBill" : true,
+          "Invoices" : "",
+          "PrimaryEmail" : "PrimaryEmail",
+          "PaymentTerm" : 0,
+          "ModifiedBy" : "ModifiedBy",
+          "ModifiedDate" : "ModifiedDate",
+          "AccountNumber" : "AccountNumber",
+          "CurrencyCode" : "CurrencyCode",
+          "Transactions" : "",
+          "CompanyName" : "CompanyName",
+          "Contacts" : "",
+          "BillToParent" : true,
+          "FullName" : "FullName",
+          "CreatedDate" : "CreatedDate",
+          "ID" : "ID",
+          "SubscriptionCharges" : ""
+        }, {
+          "Activities" : "",
+          "CreatedBy" : "CreatedBy",
+          "CollectiveBilling" : true,
+          "Subscriptions" : "",
+          "AutoBill" : true,
+          "Invoices" : "",
+          "PrimaryEmail" : "PrimaryEmail",
+          "PaymentTerm" : 0,
+          "ModifiedBy" : "ModifiedBy",
+          "ModifiedDate" : "ModifiedDate",
+          "AccountNumber" : "AccountNumber",
+          "CurrencyCode" : "CurrencyCode",
+          "Transactions" : "",
+          "CompanyName" : "CompanyName",
+          "Contacts" : "",
+          "BillToParent" : true,
+          "FullName" : "FullName",
+          "CreatedDate" : "CreatedDate",
+          "ID" : "ID",
+          "SubscriptionCharges" : ""
+        } ],
+        "paging" : {
+          "PageSize" : 2,
+          "PageNumber" : 4,
+          "TotalPages" : 3,
+          "TotalItems" : 9
+        }
+      }
+    },
+    "Model6" : {
+      "properties" : {
+        "Time" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "Time" : "Time"
+      }
+    }
+  }
+}
